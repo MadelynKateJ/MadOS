@@ -2,40 +2,36 @@
 
 set -e
 
-PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
-
 echo "========================================"
 echo "      MadOS Update Build System"
 echo "========================================"
-echo ""
+echo
+
+PACKAGE="packaging"
 
 echo "[1/6] Cleaning old package..."
-rm -f "$PROJECT_DIR/mados-update.deb"
+rm -rf "$PACKAGE/usr/share/mados-update"
+mkdir -p "$PACKAGE/usr/share/mados-update/widgets"
 
-echo "[2/6] Preparing package..."
-rm -rf "$PROJECT_DIR/packaging/usr/share/mados-update"
-mkdir -p "$PROJECT_DIR/packaging/usr/share/mados-update"
+echo "[2/6] Copying source..."
+cp src/madosupdate.py "$PACKAGE/usr/share/mados-update/"
+cp src/widgets/*.py "$PACKAGE/usr/share/mados-update/widgets/"
 
-echo "[3/6] Copying source..."
-cp -r "$PROJECT_DIR/src/"* \
-      "$PROJECT_DIR/packaging/usr/share/mados-update/"
+if [ -d src/helper ]; then
+    mkdir -p "$PACKAGE/usr/share/mados-update/helper"
+    cp src/helper/*.py "$PACKAGE/usr/share/mados-update/helper/"
+fi
 
-chmod 755 "$PROJECT_DIR/packaging/usr/bin/mados-update"
+echo "[3/6] Building package..."
+dpkg-deb --build "$PACKAGE" mados-update.deb
 
-echo "[4/6] Building package..."
-dpkg-deb --build \
-    "$PROJECT_DIR/packaging" \
-    "$PROJECT_DIR/mados-update.deb"
+echo "[4/6] Installing..."
+sudo apt install -y ./mados-update.deb
 
-echo "[5/6] Installing..."
-sudo apt install --reinstall \
-    "$PROJECT_DIR/mados-update.deb" \
-    -y
-
-echo "[6/6] Launching..."
+echo "[5/6] Launching..."
 mados-update &
 
-echo ""
+echo
 echo "========================================"
 echo "✓ Build Complete!"
 echo "========================================"
