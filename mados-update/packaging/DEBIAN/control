@@ -1,0 +1,9 @@
+Package: mados-update
+Version: 0.1
+Section: admin
+Priority: optional
+Architecture: all
+Maintainer: Madelyn <madelyn@mados.dev>
+Depends: python3, python3-gi, python3-apt
+Description: MadOS Update Manager
+ Native update manager for MadOS.

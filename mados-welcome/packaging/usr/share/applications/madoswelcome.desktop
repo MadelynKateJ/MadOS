@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=MadOS Welcome
+Comment=Welcome to MadOS
+Exec=madoswelcome
+Icon=applications-system
+Terminal=false
+Categories=System;
+StartupNotify=true

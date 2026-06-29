@@ -1,0 +1,30 @@
+window {
+    background: #202124;
+}
+
+button {
+    background: #ff5ca8;
+    color: white;
+    border-radius: 12px;
+    border: none;
+    padding: 10px;
+}
+
+button:hover {
+    background: #ff78b9;
+}
+
+frame {
+    border-radius: 18px;
+    border: 1px solid #444;
+    padding: 10px;
+    background: #2b2d31;
+}
+
+label {
+    color: white;
+}
+
+box {
+    background: transparent;
+}

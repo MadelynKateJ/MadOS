@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=MadOS Update
+Comment=Update your MadOS system
+Exec=mados-update
+Icon=system-software-update
+Terminal=false
+Categories=System;Settings;
+StartupNotify=true

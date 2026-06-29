@@ -1,0 +1,9 @@
+Package: mados-core
+Version: 0.1
+Section: libs
+Priority: optional
+Architecture: all
+Maintainer: Madelyn <madelyn@mados.dev>
+Depends: python3
+Description: MadOS Core Framework
+ Shared Python framework used by all MadOS applications.
