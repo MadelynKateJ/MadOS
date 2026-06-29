@@ -1,15 +1,32 @@
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
 
+# Debian packages
 *.deb
 
+# Python packaging
+*.egg-info/
 build/
-
 dist/
 
-*.egg-info/
+# Virtual environments
+venv/
+.venv/
 
-*.swp
+# Editor files
 *~
+*.swp
+*.swo
 
-.packaging/
+# IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
