@@ -1,7 +1,11 @@
 #!/bin/bash
 
+clear
+
 echo
-echo "Launching MadOS Welcome..."
+echo "========================================"
+echo "        Launching MadOS"
+echo "========================================"
 echo
 
 python3 mados-welcome/src/madoswelcome.py

@@ -2,35 +2,36 @@
 
 set -e
 
+clear
+
 echo
 echo "========================================"
-echo "      MadOS Build System"
+echo "        MadOS Build System"
 echo "========================================"
 echo
 
-projects=(
+PROJECTS=(
     "mados_core"
     "mados-update"
     "mados-welcome"
 )
 
-for project in "${projects[@]}"
+for project in "${PROJECTS[@]}"
 do
+
     echo
-    echo "========================================"
-    echo "Building $project"
-    echo "========================================"
+    echo "▶ Building $project"
+    echo
 
-    cd "$project"
+    (
+        cd "$project"
+        chmod +x build.sh
+        ./build.sh
+    )
 
-    chmod +x build.sh
-
-    ./build.sh
-
-    cd ..
 done
 
 echo
 echo "========================================"
-echo "✓ Everything Built Successfully"
+echo "✓ MadOS Build Complete"
 echo "========================================"
