@@ -155,12 +155,67 @@ if [ "$TARGET_USER" != "root" ] && id "$TARGET_USER" >/dev/null 2>&1; then
       echo "WARNING: Candy icons download failed; continuing without them."
     fi
   fi
-  chown -R "$TARGET_USER":"$TARGET_USER" "$UHOME/.local/share" "$UHOME/Pictures"
+  # Round 2 pieces: face (launcher + avatar), Konsole scheme, bells,
+  # splash, cursors, UI font.
+  mkdir -p "$UHOME/.local/share/mados" "$UHOME/.local/share/konsole" \
+           "$UHOME/.local/share/sounds" "$UHOME/.local/share/ksplash/Themes" \
+           "$UHOME/.local/share/fonts"
+  cp "$SK/face.png" "$UHOME/.local/share/mados/face.png"
+  cp "$SK/face.png" "$UHOME/.face.icon"
+  cp "$SK/face.png" "$UHOME/.face"
+  cp "$SK/konsole/MadOSSakura.colorscheme" "$UHOME/.local/share/konsole/"
+  PROF="$(ls "$UHOME"/.local/share/konsole/*.profile 2>/dev/null | head -1)"
+  if [ -z "$PROF" ]; then
+    printf '[Appearance]\nColorScheme=MadOSSakura\nFont=Hack,11,-1,5,50,0,0,0,0,0\n\n[General]\nName=MadOS Sakura\nParent=FALLBACK/\n\n[Scrolling]\nHistoryMode=2\n' \
+      > "$UHOME/.local/share/konsole/MadOS Sakura.profile"
+  fi
+  rm -rf "$UHOME/.local/share/sounds/mados-bells"
+  cp -r "$SK/sounds/mados-bells" "$UHOME/.local/share/sounds/"
+  rm -rf "$UHOME/.local/share/ksplash/Themes/MadOSSakura"
+  cp -r "$SK/ksplash/MadOSSakura" "$UHOME/.local/share/ksplash/Themes/"
+  if [ ! -d "$UHOME/.local/share/icons/catppuccin-latte-flamingo-cursors" ]; then
+    if curl -fsSL -o /tmp/ctp-cursors.zip \
+        https://github.com/catppuccin/cursors/releases/download/v2.0.0/catppuccin-latte-flamingo-cursors.zip; then
+      python3 -m zipfile -e /tmp/ctp-cursors.zip "$UHOME/.local/share/icons/" \
+        || echo "WARNING: cursor extract failed; continuing."
+    else
+      echo "WARNING: cursor download failed; continuing without them."
+    fi
+  fi
+  curl -fsSL -o "$UHOME/.local/share/fonts/Comfortaa.ttf" \
+    "https://github.com/google/fonts/raw/main/ofl/comfortaa/Comfortaa%5Bwght%5D.ttf" \
+    || echo "WARNING: Comfortaa download failed; keeping the default font."
+  chown -R "$TARGET_USER":"$TARGET_USER" "$UHOME/.local/share" "$UHOME/Pictures" \
+    "$UHOME/.face" "$UHOME/.face.icon"
   as_user() {
     runuser -u "$TARGET_USER" -- env HOME="$UHOME" \
       XDG_RUNTIME_DIR="/run/user/$UUID_NUM" \
       DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$UUID_NUM/bus" "$@"
   }
+  if [ -n "$PROF" ]; then
+    as_user kwriteconfig6 --file "$PROF" --group Appearance \
+      --key ColorScheme MadOSSakura || true
+  else
+    as_user kwriteconfig6 --file konsolerc --group "Desktop Entry" \
+      --key DefaultProfile "MadOS Sakura.profile" || true
+  fi
+  as_user kwriteconfig6 --file kdeglobals --group Sounds \
+    --key Theme mados-bells || true
+  as_user kwriteconfig6 --file ksplashrc --group KSplash \
+    --key Theme MadOSSakura || true
+  as_user kwriteconfig6 --file ksplashrc --group KSplash \
+    --key Engine KSplashQML || true
+  as_user kwriteconfig6 --file kscreenlockerrc --group Greeter \
+    --group Wallpaper --group org.kde.image --group General \
+    --key Image "file://$UHOME/Pictures/mados-sakura-wallpaper.jpg" || true
+  if [ -d "$UHOME/.local/share/icons/catppuccin-latte-flamingo-cursors" ]; then
+    as_user kwriteconfig6 --file kcminputrc --group Mouse \
+      --key cursorTheme "Catppuccin Latte Flamingo" || true
+  fi
+  if [ -f "$UHOME/.local/share/fonts/Comfortaa.ttf" ]; then
+    as_user kwriteconfig6 --file kdeglobals --group General --key font \
+      "Comfortaa,10.5,-1,5,50,0,0,0,0,0" || true
+  fi
   as_user kwriteconfig6 --file kdeglobals --group General \
     --key ColorScheme MadOSSakura || true
   as_user kwriteconfig6 --file kdeglobals --group General \
@@ -179,6 +234,9 @@ if [ "$TARGET_USER" != "root" ] && id "$TARGET_USER" >/dev/null 2>&1; then
   as_user plasma-apply-wallpaperimage \
     "$UHOME/Pictures/mados-sakura-wallpaper.jpg" || true
   as_user qdbus6 org.kde.KWin /KWin reconfigure || true
+  JS='applets().filter(function(a){return a.pluginName.indexOf("kickoff")>=0||a.pluginName.indexOf("kicker")>=0}).forEach(function(a){a.currentConfigGroup=["General"];a.writeConfig("icon","'"$UHOME"'/.local/share/mados/face.png")});panels().forEach(function(p){p.floating=true});'
+  as_user qdbus6 org.kde.plasmashell /PlasmaShell \
+    org.kde.PlasmaShell.evaluateScript "$JS" || true
 fi
 
 say "DONE"

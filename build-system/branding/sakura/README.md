@@ -8,7 +8,8 @@ session any time with `apply-sakura.sh`.
 ## What's in it
 
 - **Wallpaper** — `mados-sakura-wallpaper.jpg`: sakura branches framing
-  a calm, pale centre so icons and windows stay readable.
+  a calm, pale centre so icons and windows stay readable. It is also
+  set as the lock screen wallpaper.
 - **Color scheme** — `MadOSSakura.colors`: blush-white windows
   (255,245,248), pink-400 selection and accent (244,114,182), plum text
   (93,52,70). Accent color is also written to kdeglobals so highlights
@@ -19,6 +20,27 @@ session any time with `apply-sakura.sh`.
 - **Window decoration** — `decoration/MadOSSakura/`, an Aurorae theme.
   The frame is a blush recolor of the WhiteSur light decoration's
   geometry (GPL v3, see its metadata). The buttons are the point:
+- **Konsole** — `konsole/MadOSSakura.colorscheme`: a transparent,
+  light rose terminal (86% opacity over a blush background, plum text,
+  pink selection, KWin blur behind it).
+- **The face** — `face.png`, the cat face from the MadOS logo, used as
+  the app-launcher icon and the user avatar. The panel floats.
+- **Cursors** — Catppuccin Latte Flamingo (light theme, flamingo pink;
+  fetched from the Catppuccin cursors release at apply time).
+- **Sounds** — `sounds/mados-bells/`: MadOS Bells, a freedesktop sound
+  theme of soft synthesized bells (fundamental plus inharmonic
+  partials, exponential decay) for login, logout, notifications,
+  volume changes and dialogs. Try the volume keys after applying.
+- **Font** — Comfortaa as the UI font (user-local install, best
+  effort).
+- **Splash** — `ksplash/MadOSSakura/`: the loading screen after login,
+  blossom wallpaper behind a blush card with the MadOS wordmark and
+  three pulsing pink dots.
+- **Login + boot (root, optional)** — `sakura-system.sh` builds an
+  SDDM theme and a GRUB theme from `mados-sakura-dusk.jpg` (the same
+  blossoms at night, so white login text stays readable) and sets the
+  system avatar. Run it once with sudo; the user-level pieces never
+  need root.
 
 ## The buttons
 

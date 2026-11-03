@@ -1,0 +1,8 @@
+[Sound Theme]
+Name=MadOS Bells
+Comment=Soft synthesized bells for MadOS
+Inherits=freedesktop
+Directories=stereo
+
+[stereo]
+OutputProfile=stereo
