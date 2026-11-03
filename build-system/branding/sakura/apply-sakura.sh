@@ -47,9 +47,9 @@ rm -rf "$HOME/.local/share/aurorae/themes/MadOSSakura"
 cp -r "$SK/decoration/MadOSSakura" "$HOME/.local/share/aurorae/themes/"
 
 # Face: launcher icon + avatar
-cp "$SK/face.png" "$HOME/.local/share/mados/face.png"
-cp "$SK/face.png" "$HOME/.face.icon"
-cp "$SK/face.png" "$HOME/.face"
+cp "$SK/cat.png" "$HOME/.local/share/mados/cat.png"
+cp "$SK/cat.png" "$HOME/.face.icon"
+cp "$SK/cat.png" "$HOME/.face"
 
 # Konsole scheme (onto the current profile, or a new default profile)
 cp "$SK/konsole/MadOSSakura.colorscheme" "$HOME/.local/share/konsole/"
@@ -175,7 +175,7 @@ if kick:
         lines.insert(i + 1, key + '=' + val)
 
     set_key('[Containments][%s][Applets][%s][Configuration][General]' % (c, a),
-            'icon', home + '/.local/share/mados/face.png')
+            'icon', home + '/.local/share/mados/cat.png')
     set_key('[Containments][%s]' % c, 'floating', '1')
     open(p, 'w').write('\n'.join(lines))
 PYEOF

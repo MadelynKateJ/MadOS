@@ -6,7 +6,7 @@
 #
 #   sudo bash build-system/branding/sakura/sakura-system.sh
 #
-# Uses mados-sakura-dusk.jpg and face.png from this same folder.
+# Uses mados-sakura-dusk.jpg and cat.png from this same folder.
 # Safe to re-run.
 # =============================================================================
 set -e
@@ -74,7 +74,7 @@ echo "GRUB theme set to mados."
 U="${SUDO_USER:-}"
 if [ -n "$U" ] && id "$U" >/dev/null 2>&1; then
   mkdir -p /var/lib/AccountsService/icons /var/lib/AccountsService/users
-  cp "$HERE/face.png" "/var/lib/AccountsService/icons/$U"
+  cp "$HERE/cat.png" "/var/lib/AccountsService/icons/$U"
   if [ -f "/var/lib/AccountsService/users/$U" ]; then
     if grep -q '^Icon=' "/var/lib/AccountsService/users/$U"; then
       sed -i "s|^Icon=.*|Icon=/var/lib/AccountsService/icons/$U|" \

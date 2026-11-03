@@ -160,9 +160,9 @@ if [ "$TARGET_USER" != "root" ] && id "$TARGET_USER" >/dev/null 2>&1; then
   mkdir -p "$UHOME/.local/share/mados" "$UHOME/.local/share/konsole" \
            "$UHOME/.local/share/sounds" "$UHOME/.local/share/plasma" \
            "$UHOME/.local/share/fonts"
-  cp "$SK/face.png" "$UHOME/.local/share/mados/face.png"
-  cp "$SK/face.png" "$UHOME/.face.icon"
-  cp "$SK/face.png" "$UHOME/.face"
+  cp "$SK/cat.png" "$UHOME/.local/share/mados/cat.png"
+  cp "$SK/cat.png" "$UHOME/.face.icon"
+  cp "$SK/cat.png" "$UHOME/.face"
   cp "$SK/konsole/MadOSSakura.colorscheme" "$UHOME/.local/share/konsole/"
   PROF="$(ls "$UHOME"/.local/share/konsole/*.profile 2>/dev/null | head -1)"
   if [ -z "$PROF" ]; then
@@ -281,7 +281,7 @@ if kick:
         lines.insert(i + 1, key + '=' + val)
 
     set_key('[Containments][%s][Applets][%s][Configuration][General]' % (c, a),
-            'icon', home + '/.local/share/mados/face.png')
+            'icon', home + '/.local/share/mados/cat.png')
     set_key('[Containments][%s]' % c, 'floating', '1')
     open(p, 'w').write('\n'.join(lines))
 PYEOF

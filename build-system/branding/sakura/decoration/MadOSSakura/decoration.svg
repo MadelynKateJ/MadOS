@@ -13,13 +13,13 @@
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
      id="namedview193"
-     pagecolor="#fff8fb"
-     bordercolor="#c79bb1"
+     pagecolor="#ffeef6"
+     bordercolor="#c083a3"
      borderopacity="1.0"
      inkscape:showpageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#f2c4d8"
+     inkscape:deskcolor="#f0b4d1"
      showgrid="false"
      inkscape:zoom="1.0766271"
      inkscape:cx="621.38507"
@@ -210,12 +210,12 @@
         <path
            transform="translate(-121,89.063)"
            d="m453 86c-6.648 0-12 5.352-12 12v18h29v-30z"
-           fill="#fdeef5"
+           fill="#ffd9e9"
            id="path44" />
         <path
            transform="translate(-121,89.063)"
            d="m453 86c-6.648 0-12 5.352-12 12v1c0-6.648 5.352-12 12-12h17v-1z"
-           fill="#fff8fb"
+           fill="#ffeef6"
            opacity=".08"
            id="path46" />
       </g>
@@ -244,7 +244,7 @@
     <path
        transform="translate(-255.12,76)"
        d="m576 121v86h29v-86z"
-       fill="#fff8fb"
+       fill="#ffeef6"
        id="path59" />
   </g>
   <g
@@ -262,14 +262,14 @@
        id="path64" />
     <path
        d="m470 277h-145v12h145z"
-       fill="#fdeef5"
+       fill="#ffd9e9"
        opacity=".75"
        id="path66" />
   </g>
   <path
      id="decoration-center"
      d="m105 110v86h145v-86z"
-     fill="#fff8fb" />
+     fill="#ffeef6" />
   <g
      id="decoration-top"
      transform="translate(-220,-96)">
@@ -287,11 +287,11 @@
        id="path72" />
     <path
        d="m325 176v30h145v-30z"
-       fill="#fff8fb"
+       fill="#ffeef6"
        id="path74" />
     <path
        d="m325 176v1h145v-1z"
-       fill="#fff8fb"
+       fill="#ffeef6"
        opacity=".1"
        id="path76" />
   </g>
@@ -312,7 +312,7 @@
     <path
        transform="translate(-255.12,76)"
        d="m576 121v86h29v-86z"
-       fill="#fff8fb"
+       fill="#ffeef6"
        id="path83" />
   </g>
   <g
@@ -330,14 +330,14 @@
        id="path88" />
     <path
        d="m470 276.92h-145v12h145z"
-       fill="#fdeef5"
+       fill="#ffd9e9"
        opacity=".75"
        id="path90" />
   </g>
   <path
      id="decoration-inactive-center"
      d="m470 110v86h145v-86z"
-     fill="#fdeef5" />
+     fill="#ffd9e9" />
   <g
      id="decoration-inactive-top"
      transform="translate(145,-96)">
@@ -355,11 +355,11 @@
        id="path96" />
     <path
        d="m325 176v30h145v-30z"
-       fill="#fdeef5"
+       fill="#ffd9e9"
        id="path98" />
     <path
        d="m325 176v1h145v-1z"
-       fill="#fff8fb"
+       fill="#ffeef6"
        opacity=".08"
        id="path100" />
   </g>
@@ -378,7 +378,7 @@
        id="path105" />
     <path
        d="m320.88 197.02v86h29v-86z"
-       fill="#fdeef5"
+       fill="#ffd9e9"
        id="path107" />
   </g>
   <g
@@ -387,7 +387,7 @@
     <path
        transform="translate(385,94)"
        d="m81 196c0 6.648 5.352 12 12 12h17v-12z"
-       fill="#fdeef5"
+       fill="#ffd9e9"
        opacity=".75"
        id="path110" />
     <g
@@ -413,7 +413,7 @@
     <path
        transform="translate(0,90)"
        d="m441 196c0 6.648 5.352 12 12 12h17v-12z"
-       fill="#fdeef5"
+       fill="#ffd9e9"
        opacity=".75"
        id="path119" />
     <g
@@ -505,7 +505,7 @@
        id="g144">
       <g
          transform="matrix(-1,0,0,1,524,26)"
-         fill="#fff8fb"
+         fill="#ffeef6"
          id="g142">
         <path
            transform="translate(239,89.062)"
@@ -540,7 +540,7 @@
        id="path151" />
     <path
        d="m320.88 197.02v86h29v-86z"
-       fill="#fdeef5"
+       fill="#ffd9e9"
        id="path153" />
   </g>
   <use

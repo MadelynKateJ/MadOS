@@ -17,8 +17,8 @@ IntensityAmount=0
 IntensityEffect=0
 
 [Colors:Button]
-BackgroundAlternate=251,207,232
-BackgroundNormal=253,232,241
+BackgroundAlternate=247,190,216
+BackgroundNormal=251,214,231
 DecorationFocus=244,114,182
 DecorationHover=249,168,212
 ForegroundActive=219,39,119
@@ -45,8 +45,8 @@ ForegroundPositive=39,174,96
 ForegroundVisited=216,180,200
 
 [Colors:Header]
-BackgroundAlternate=251,207,232
-BackgroundNormal=253,232,241
+BackgroundAlternate=244,168,203
+BackgroundNormal=247,183,212
 DecorationFocus=244,114,182
 DecorationHover=249,168,212
 ForegroundActive=219,39,119
@@ -59,8 +59,8 @@ ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
 [Colors:Header][Inactive]
-BackgroundAlternate=252,221,236
-BackgroundNormal=254,242,247
+BackgroundAlternate=248,192,217
+BackgroundNormal=250,206,226
 DecorationFocus=244,114,182
 DecorationHover=249,168,212
 ForegroundActive=219,39,119
@@ -101,8 +101,8 @@ ForegroundPositive=39,174,96
 ForegroundVisited=216,180,200
 
 [Colors:View]
-BackgroundAlternate=254,242,247
-BackgroundNormal=255,250,252
+BackgroundAlternate=250,220,234
+BackgroundNormal=253,234,243
 DecorationFocus=244,114,182
 DecorationHover=249,168,212
 ForegroundActive=219,39,119
@@ -115,8 +115,8 @@ ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
 [Colors:Window]
-BackgroundAlternate=251,207,232
-BackgroundNormal=255,245,248
+BackgroundAlternate=248,198,221
+BackgroundNormal=252,226,238
 DecorationFocus=244,114,182
 DecorationHover=249,168,212
 ForegroundActive=219,39,119
@@ -134,9 +134,9 @@ Name=MadOS Sakura
 shadeSortColumn=true
 
 [WM]
-activeBackground=253,232,241
+activeBackground=247,183,212
 activeBlend=93,52,70
 activeForeground=147,50,95
-inactiveBackground=254,242,247
+inactiveBackground=249,205,226
 inactiveBlend=196,158,175
 inactiveForeground=148,116,132
