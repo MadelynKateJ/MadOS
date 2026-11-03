@@ -2,6 +2,10 @@
 
 MadOS is a modern Linux desktop experience built on Linux Mint and KDE Neon.
 
+Its default look is Sakura: a blossom wallpaper, blush-pink colors,
+Candy icons, and window buttons shaped like little flowers — a bud to
+minimize, a half-open blossom to maximize, a full bloom to close.
+
 ## Current Components
 
 - mados_core

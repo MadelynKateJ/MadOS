@@ -14,6 +14,7 @@
 #   5. Plymouth boot splash                 (branding/plymouth/)
 #   6. Hostname: MadOS
 #   7. Neofetch cat for your user           (branding/neofetch/)
+#   8. MadOS Sakura, the default look       (branding/sakura/)
 #
 # Expect a long run (the neon upgrade is hundreds of packages) and one
 # reboot at the end. Log: /var/log/mados-convert.log
@@ -40,7 +41,7 @@ case "$VERSION_ID" in
 esac
 TARGET_USER="${SUDO_USER:-$(logname 2>/dev/null || echo root)}"
 echo "Converting this Mint $VERSION_ID system to MadOS 0.1.0-alpha."
-echo "User getting the neofetch setup: $TARGET_USER"
+echo "User getting the per-user setup: $TARGET_USER"
 
 # --- Find (or fetch) the build-system files ----------------------------------
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd)"
@@ -56,11 +57,11 @@ fi
 echo "Build files: $BS"
 
 # --- Stage 1: KDE Plasma 6.8 (KDE neon) ---------------------------------------
-say "stage 1/7: KDE Plasma 6.8"
+say "stage 1/8: KDE Plasma 6.8"
 bash "$BS/kde68/kde68-cubic.sh"
 
 # --- Stage 2: MadOS component packages ----------------------------------------
-say "stage 2/7: MadOS components"
+say "stage 2/8: MadOS components"
 DEBS=/tmp/mados-debs
 mkdir -p "$DEBS"
 REL=https://github.com/MadelynKateJ/MadOS/releases/download/v0.1.0-alpha
@@ -77,7 +78,7 @@ else
 fi
 
 # --- Stage 3: SDDM + Plasma session, Cinnamon out ------------------------------
-say "stage 3/7: display manager and session"
+say "stage 3/8: display manager and session"
 echo "sddm shared/default-x-display-manager select sddm" | debconf-set-selections
 echo "/usr/bin/sddm" > /etc/X11/default-display-manager
 systemctl disable lightdm 2>/dev/null || true
@@ -88,11 +89,11 @@ apt-get purge -y cinnamon cinnamon-common cinnamon-session \
 apt-get autoremove --purge -y
 
 # --- Stage 4: the de-Mint sweep -------------------------------------------------
-say "stage 4/7: de-Mint sweep"
+say "stage 4/8: de-Mint sweep"
 bash "$BS/branding/demint.sh"
 
 # --- Stage 5: Plymouth splash ----------------------------------------------------
-say "stage 5/7: Plymouth splash"
+say "stage 5/8: Plymouth splash"
 mkdir -p /usr/share/plymouth/themes/mados
 cp "$BS"/branding/plymouth/mados.plymouth "$BS"/branding/plymouth/mados.script \
    "$BS"/branding/plymouth/splash.png /usr/share/plymouth/themes/mados/
@@ -105,12 +106,12 @@ systemctl disable casper-md5check.service 2>/dev/null || true
 update-initramfs -u
 
 # --- Stage 6: hostname ------------------------------------------------------------
-say "stage 6/7: hostname"
+say "stage 6/8: hostname"
 hostnamectl set-hostname MadOS || true
 sed -i 's/127\.0\.1\.1.*/127.0.1.1\tMadOS/' /etc/hosts || true
 
 # --- Stage 7: neofetch cat for the user --------------------------------------------
-say "stage 7/7: neofetch"
+say "stage 7/8: neofetch"
 apt-get install -y neofetch || true
 if [ "$TARGET_USER" != "root" ] && id "$TARGET_USER" >/dev/null 2>&1; then
   UHOME="$(getent passwd "$TARGET_USER" | cut -d: -f6)"
@@ -130,8 +131,60 @@ if [ "$TARGET_USER" != "root" ] && id "$TARGET_USER" >/dev/null 2>&1; then
   chown -R "$TARGET_USER":"$TARGET_USER" "$UHOME/.config/neofetch"
 fi
 
+# --- Stage 8: MadOS Sakura, the default look --------------------------------------
+say "stage 8/8: MadOS Sakura"
+if [ "$TARGET_USER" != "root" ] && id "$TARGET_USER" >/dev/null 2>&1; then
+  UHOME="$(getent passwd "$TARGET_USER" | cut -d: -f6)"
+  UUID_NUM="$(id -u "$TARGET_USER")"
+  SK="$BS/branding/sakura"
+  mkdir -p "$UHOME/.local/share/color-schemes" \
+           "$UHOME/.local/share/aurorae/themes" \
+           "$UHOME/.local/share/icons" \
+           "$UHOME/Pictures"
+  cp "$SK/MadOSSakura.colors" "$UHOME/.local/share/color-schemes/"
+  cp "$SK/mados-sakura-wallpaper.jpg" "$UHOME/Pictures/"
+  rm -rf "$UHOME/.local/share/aurorae/themes/MadOSSakura"
+  cp -r "$SK/decoration/MadOSSakura" "$UHOME/.local/share/aurorae/themes/"
+  if [ ! -d "$UHOME/.local/share/icons/candy-icons" ]; then
+    if curl -fsSL -o /tmp/candy-icons.tar.gz \
+        https://codeload.github.com/EliverLara/candy-icons/tar.gz/refs/heads/master; then
+      mkdir -p "$UHOME/.local/share/icons/candy-icons"
+      tar -xzf /tmp/candy-icons.tar.gz -C "$UHOME/.local/share/icons/candy-icons" \
+        --strip-components=1 || echo "WARNING: Candy icons extract failed; continuing."
+    else
+      echo "WARNING: Candy icons download failed; continuing without them."
+    fi
+  fi
+  chown -R "$TARGET_USER":"$TARGET_USER" "$UHOME/.local/share" "$UHOME/Pictures"
+  as_user() {
+    runuser -u "$TARGET_USER" -- env HOME="$UHOME" \
+      XDG_RUNTIME_DIR="/run/user/$UUID_NUM" \
+      DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$UUID_NUM/bus" "$@"
+  }
+  as_user kwriteconfig6 --file kdeglobals --group General \
+    --key ColorScheme MadOSSakura || true
+  as_user kwriteconfig6 --file kdeglobals --group General \
+    --key AccentColor "244,114,182" || true
+  if [ -f "$UHOME/.local/share/icons/candy-icons/index.theme" ]; then
+    as_user kwriteconfig6 --file kdeglobals --group Icons \
+      --key Theme candy-icons || true
+  fi
+  as_user kwriteconfig6 --file kwinrc --group org.kde.kdecoration2 \
+    --key library org.kde.kwin.aurorae || true
+  as_user kwriteconfig6 --file kwinrc --group org.kde.kdecoration2 \
+    --key theme __aurorae__svg__MadOSSakura || true
+  # Best-effort live apply if the session is already running; the config
+  # keys above make Sakura stick at login either way.
+  as_user plasma-apply-colorscheme MadOSSakura || true
+  as_user plasma-apply-wallpaperimage \
+    "$UHOME/Pictures/mados-sakura-wallpaper.jpg" || true
+  as_user qdbus6 org.kde.KWin /KWin reconfigure || true
+fi
+
 say "DONE"
 echo "This system is now MadOS 0.1.0-alpha. Reboot to see it:"
 echo "  sudo reboot"
 echo "Mint Welcome is still installed (kept on purpose until mados-welcome"
 echo "is finished). Everything else Mint-branded is gone."
+echo "The default look is MadOS Sakura: blossom wallpaper, blush colors,"
+echo "Candy icons, and flower window buttons (bud, half-open, full bloom)."

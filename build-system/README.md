@@ -19,9 +19,12 @@ works from the copy. Run from a clone
 (`sudo bash build-system/convert-to-mados.sh`) it uses the local
 files. Stages: neon Plasma 6.8, the six component .debs from the
 v0.1.0-alpha release, SDDM + Plasma session with Cinnamon removed,
-the de-Mint sweep, Plymouth, hostname, and the neofetch cat for the
-invoking user. Log at /var/log/mados-convert.log; one reboot at the
-end.
+the de-Mint sweep, Plymouth, hostname, the neofetch cat for the
+invoking user, and the MadOS Sakura default look (branding/sakura/:
+blossom wallpaper, blush color scheme, Candy icons, and a hand-built
+Aurorae window decoration whose buttons are little flowers — a bud
+for minimize, a half-open blossom for maximize, a full bloom for
+close). Log at /var/log/mados-convert.log; one reboot at the end.
 
 **End-to-end tested 2026-11-03:** a fresh Linux Mint 22.3 install in a
 throwaway VM, converted with the one line above, rebooted into SDDM +
