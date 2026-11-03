@@ -190,3 +190,12 @@ fi
 echo "MadOS Sakura applied in full: scheme, wallpaper (desktop + lock),"
 echo "icons, blossom buttons, Konsole, face, cursors, bells, font, splash."
 echo "Restart the session (or plasmashell) for the font to show everywhere."
+
+# 12. Desktop theme: blush Breeze into MadOS Sakura (pink menus/dialogs,
+#     blossoms tucked into the dialog background). Rebuilt from the
+#     system Breeze copy each run; safe to re-run.
+if [ -f "$HERE/patch-desktoptheme.py" ]; then
+  python3 "$HERE/patch-desktoptheme.py" || true
+  plasma-apply-desktoptheme MadOSSakura 2>/dev/null || \
+    kwriteconfig6 --file plasmarc --group Theme --key name MadOSSakura
+fi

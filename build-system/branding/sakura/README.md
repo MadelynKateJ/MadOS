@@ -76,3 +76,14 @@ Pick any other color scheme / decoration in System Settings, or delete
 `~/.local/share/aurorae/themes/MadOSSakura`,
 `~/.local/share/color-schemes/MadOSSakura.colors`, and the wallpaper
 from `~/Pictures`.
+
+## Desktop theme (start menu, dialogs, panel)
+
+`patch-desktoptheme.py` blushes the system Breeze desktop theme into a
+user theme named **MadOS Sakura**: every shape bound to
+`ColorScheme-Background` in the dialog and panel frame SVGs is
+hard-painted sakura pink (#F9A8D4 dialogs, #FBDCEB panel), so menus
+stay properly pink regardless of the (paler) window color scheme, and
+a small blossom cluster is tucked into the dialog background's center
+tile. It copies the pristine system theme each run, validates the XML
+before writing, and applies with `plasma-apply-desktoptheme`.
