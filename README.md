@@ -40,3 +40,15 @@ MadOS is a modern Linux desktop experience built on Linux Mint and KDE Neon.
 Current Status:
 
 ✅ Alpha 0.1
+
+## Turn a fresh Mint install into MadOS
+
+Install Linux Mint 22.x, then run one line:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/MadelynKateJ/MadOS/main/build-system/convert-to-mados.sh | sudo bash
+```
+
+It installs KDE Plasma 6.8, the MadOS components, the boot splash and
+branding, and removes the Mint identity (Mint Welcome stays until
+mados-welcome is finished). Details: `build-system/convert-to-mados.sh`.

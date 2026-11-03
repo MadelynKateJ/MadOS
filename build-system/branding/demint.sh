@@ -14,6 +14,9 @@
 set -x
 
 # --- Identity files ---------------------------------------------------
+# NAME/PRETTY_NAME/VERSION become MadOS. ID=linuxmint deliberately stays:
+# update tooling finds its repos through it, and changing it broke installs.
+sed -i 's|^NAME=.*|NAME="MadOS"|; s|^PRETTY_NAME=.*|PRETTY_NAME="MadOS 0.1.0-alpha"|; s|^VERSION=.*|VERSION="0.1.0-alpha"|' /etc/os-release
 sed -i 's|HOME_URL=.*|HOME_URL="https://madoslinux.org/"|; s|SUPPORT_URL=.*|SUPPORT_URL="https://madoslinux.org/"|; s|BUG_REPORT_URL=.*|BUG_REPORT_URL="https://madoslinux.org/"|; s|PRIVACY_POLICY_URL=.*|PRIVACY_POLICY_URL="https://madoslinux.org/"|' /etc/os-release
 sed -i 's|DISTRIB_ID=.*|DISTRIB_ID=MadOS|; s|DISTRIB_DESCRIPTION=.*|DISTRIB_DESCRIPTION="MadOS 0.1.0-alpha"|' /etc/lsb-release
 printf 'MadOS 0.1.0-alpha \\n \\l\n\n' > /etc/issue

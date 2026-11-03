@@ -5,6 +5,24 @@ with Cubic's project layout, with KDE Plasma 6.8 from KDE neon
 force-installed, the MadOS components added, and the result
 rebranded end to end. Surprisingly functional.
 
+## The one-command conversion
+
+`convert-to-mados.sh` replays everything in this folder, in order, on
+an already-installed system: fresh Linux Mint 22.x in, MadOS out.
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/MadelynKateJ/MadOS/main/build-system/convert-to-mados.sh | sudo bash
+```
+
+Run standalone like that, the script downloads this repo itself and
+works from the copy. Run from a clone
+(`sudo bash build-system/convert-to-mados.sh`) it uses the local
+files. Stages: neon Plasma 6.8, the six component .debs from the
+v0.1.0-alpha release, SDDM + Plasma session with Cinnamon removed,
+the de-Mint sweep, Plymouth, hostname, and the neofetch cat for the
+invoking user. Log at /var/log/mados-convert.log; one reboot at the
+end.
+
 ## Pipeline
 
 1. **Extract the base ISO** — `iso/extract-mint.sh` builds the Cubic
