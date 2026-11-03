@@ -22,27 +22,6 @@ sed -i 's|DISTRIB_ID=.*|DISTRIB_ID=MadOS|; s|DISTRIB_DESCRIPTION=.*|DISTRIB_DESC
 printf 'MadOS 0.1.0-alpha \\n \\l\n\n' > /etc/issue
 sed -i 's|EDITION=.*|EDITION="Plasma"|; s|DESCRIPTION=.*|DESCRIPTION="MadOS 0.1.0-alpha"|; s|DESKTOP=.*|DESKTOP=KDE|; s|TOOLKIT=.*|TOOLKIT=Qt|; s|GRUB_TITLE=.*|GRUB_TITLE=MadOS|; s|NEW_FEATURES_URL=.*|NEW_FEATURES_URL=https://madoslinux.org/|; s|RELEASE_NOTES_URL=.*|RELEASE_NOTES_URL=https://madoslinux.org/|; s|USER_GUIDE_URL=.*|USER_GUIDE_URL=https://madoslinux.org/|' /etc/linuxmint/info
 
-# --- Firefox partner branding -----------------------------------------
-cp /usr/lib/firefox/distribution/distribution.ini /tmp/distribution.ini.mint-backup
-cat > /usr/lib/firefox/distribution/distribution.ini <<'INI'
-# Partner Distribution Configuration File
-[Global]
-id=mados-001
-version=1.0
-about=Mozilla Firefox for MadOS
-
-[Preferences]
-app.distributor.channel="alpha"
-app.distributor="mados"
-app.partner.mados="mados"
-app.update.enabled=false
-browser.shell.checkDefaultBrowser=false
-intl.locale.requested=""
-mozilla.partner.id="mados"
-browser.backspace_action=0
-browser.tabs.inTitlebar=0
-INI
-
 # --- Remove Mint-branded apps, artwork, and Cinnamon residue ----------
 apt-get purge -y \
   mintupdate mintinstall mintbackup mintchat mintdrivers mintlocale \
@@ -66,3 +45,31 @@ grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable
 update-grub
 
 apt-get check
+
+# --- Firefox partner branding (LAST, on purpose) ----------------------
+# This must run after every apt transaction in this script: KDE neon
+# registers Mozilla's own repo, and a late Firefox upgrade (seen in the
+# 2026-11-03 converter test) restores the stock distribution.ini over
+# the top of an earlier rewrite.
+FFINI=/usr/lib/firefox/distribution/distribution.ini
+if [ -f "$FFINI" ]; then
+  cp "$FFINI" /tmp/distribution.ini.mint-backup
+cat > "$FFINI" <<'INI'
+# Partner Distribution Configuration File
+[Global]
+id=mados-001
+version=1.0
+about=Mozilla Firefox for MadOS
+
+[Preferences]
+app.distributor.channel="alpha"
+app.distributor="mados"
+app.partner.mados="mados"
+app.update.enabled=false
+browser.shell.checkDefaultBrowser=false
+intl.locale.requested=""
+mozilla.partner.id="mados"
+browser.backspace_action=0
+browser.tabs.inTitlebar=0
+INI
+fi

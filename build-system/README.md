@@ -23,6 +23,14 @@ the de-Mint sweep, Plymouth, hostname, and the neofetch cat for the
 invoking user. Log at /var/log/mados-convert.log; one reboot at the
 end.
 
+**End-to-end tested 2026-11-03:** a fresh Linux Mint 22.3 install in a
+throwaway VM, converted with the one line above, rebooted into SDDM +
+Plasma 6.8.2 with all six components installed, the MadOS identity
+throughout, and the cat in neofetch. One fix came out of the test:
+demint.sh now writes the Firefox partner config last, because the
+neon-registered Mozilla repo can upgrade Firefox mid-sweep and
+restore the stock file.
+
 ## Pipeline
 
 1. **Extract the base ISO** — `iso/extract-mint.sh` builds the Cubic
