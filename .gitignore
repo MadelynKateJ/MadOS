@@ -30,3 +30,10 @@ Thumbs.db
 
 # Logs
 *.log
+
+# MadOS build workspace (local only)
+mados-builder/
+mados-ui/Pinguy-Builder/
+*.iso
+*.squashfs
+*.img

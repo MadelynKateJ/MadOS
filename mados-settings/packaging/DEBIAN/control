@@ -1,0 +1,6 @@
+Package: mados-settings
+Version: 0.1
+Architecture: all
+Maintainer: Madelyn
+Depends: python3, python3-gi
+Description: MadOS Settings

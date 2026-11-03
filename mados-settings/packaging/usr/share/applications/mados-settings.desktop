@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=MadOS Settings
+Exec=mados-settings
+Icon=preferences-system
+Categories=Settings;
+Terminal=false

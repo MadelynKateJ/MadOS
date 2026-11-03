@@ -1,0 +1,6 @@
+Package: mados-ui
+Version: 0.2
+Architecture: all
+Maintainer: Madelyn
+Depends: python3, python3-gi
+Description: Shared UI framework for MadOS applications.
