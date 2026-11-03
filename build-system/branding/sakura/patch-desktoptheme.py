@@ -13,8 +13,8 @@ import xml.dom.minidom
 
 SRC = "/usr/share/plasma/desktoptheme/default"
 DST = os.path.expanduser("~/.local/share/plasma/desktoptheme/MadOSSakura")
-DIALOG_PINK = "#F9A8D4"
-PANEL_PINK = "#FBDCEB"
+DIALOG_PINK = "#F472B6"
+PANEL_PINK = "#F9A8D4"
 
 def blossom(cx, cy, r, fill, op):
     parts = [f'<g transform="translate({cx},{cy})">']
@@ -29,9 +29,9 @@ def blossom(cx, cy, r, fill, op):
 
 def motif():
     return (
-        blossom(26.5, 7.5, 2.3, "#EC4899", 0.50)
-        + blossom(19.0, 15.0, 1.5, "#EC4899", 0.42)
-        + blossom(28.5, 19.5, 1.25, "#F472B6", 0.45)
+        blossom(26.0, 8.0, 3.4, "#DB2777", 0.60)
+        + blossom(18.0, 16.0, 2.2, "#DB2777", 0.52)
+        + blossom(28.5, 21.0, 1.8, "#EC4899", 0.55)
         + '<ellipse cx="22.5" cy="24.5" rx="0.8" ry="1.2" fill="#F472B6" fill-opacity="0.35" transform="rotate(30 22.5 24.5)"/>'
         + '<ellipse cx="15.5" cy="8.0" rx="0.7" ry="1.1" fill="#F472B6" fill-opacity="0.3" transform="rotate(-20 15.5 8)"/>'
     )
