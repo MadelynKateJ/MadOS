@@ -1,8 +1,8 @@
 [Background]
-Color=252,226,238
+Color=254,235,243
 
 [BackgroundIntense]
-Color=252,226,238
+Color=254,235,243
 
 [Color0]
 Color=62,35,50
@@ -69,5 +69,5 @@ Blur=true
 ColorRandomization=false
 Description=MadOS Sakura
 FillInTransparency=false
-Opacity=0.50
+Opacity=0.20
 Wallpaper=

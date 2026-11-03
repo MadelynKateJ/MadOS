@@ -21,7 +21,7 @@ session any time with `apply-sakura.sh`.
   The frame is a blush recolor of the WhiteSur light decoration's
   geometry (GPL v3, see its metadata). The buttons are the point:
 - **Konsole** — `konsole/MadOSSakura.colorscheme`: a transparent,
-  light rose terminal (50% opacity over a pink background, plum text,
+  light rose terminal (20% opacity over a pink background, plum text,
   pink selection, KWin blur behind it).
 - **The cat** — `cat.png`, the neofetch ASCII cat rendered in magenta
   on near-black, used as the app-launcher icon and the user avatar.
@@ -30,7 +30,7 @@ session any time with `apply-sakura.sh`.
 - **Palette depth** — the scheme sits between rose milk and proper
   pink: window background 252,226,238, headers 247,183,212. The first
   cut was blush-white; this is the pink she actually asked for. The
-  Konsole scheme matches at 50% opacity, blossoms ghosting through.
+  Konsole scheme matches at 20% opacity, blossoms ghosting through.
 - **Cursors** — Catppuccin Latte Flamingo (light theme, flamingo pink;
   fetched from the Catppuccin cursors release at apply time).
 - **Sounds** — `sounds/mados-bells/`: MadOS Bells, a freedesktop sound
