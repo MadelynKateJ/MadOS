@@ -35,7 +35,7 @@ mkdir -p "$HOME/.local/share/color-schemes" \
          "$HOME/.local/share/icons" \
          "$HOME/.local/share/konsole" \
          "$HOME/.local/share/sounds" \
-         "$HOME/.local/share/ksplash/Themes" \
+         "$HOME/.local/share/plasma/look-and-feel" \
          "$HOME/.local/share/mados" \
          "$HOME/.local/share/fonts" \
          "$HOME/Pictures"
@@ -104,11 +104,20 @@ else
   echo "WARNING: Comfortaa download failed; keeping the current font."
 fi
 
-# Splash screen, as default
-rm -rf "$HOME/.local/share/ksplash/Themes/MadOSSakura"
-cp -r "$SK/ksplash/MadOSSakura" "$HOME/.local/share/ksplash/Themes/"
-kwriteconfig6 --file ksplashrc --group KSplash --key Theme MadOSSakura
+# Splash screen, as default. Plasma 6.8 dropped the old
+# ~/.local/share/ksplash/Themes path (verified: /usr/share/ksplash
+# does not exist on the neon build); splashes ship inside
+# look-and-feel packages now.
+rm -rf "$HOME/.local/share/plasma/look-and-feel/org.mados.sakura"
+mkdir -p "$HOME/.local/share/plasma/look-and-feel"
+cp -r "$SK/look-and-feel/org.mados.sakura" "$HOME/.local/share/plasma/look-and-feel/"
+kwriteconfig6 --file ksplashrc --group KSplash --key Theme org.mados.sakura
 kwriteconfig6 --file ksplashrc --group KSplash --key Engine KSplashQML
+
+# MadOS power default: lock after 2 hours idle, not 5 minutes
+kwriteconfig6 --file kscreenlockerrc --group Daemon --key Autolock true
+kwriteconfig6 --file kscreenlockerrc --group Daemon --key Timeout 7200
+kwriteconfig6 --file kscreenlockerrc --group Daemon --key LockOnResume false
 
 # Live applies
 plasma-apply-colorscheme MadOSSakura || true
@@ -127,11 +136,56 @@ kwriteconfig6 --file kscreenlockerrc --group Greeter --group Wallpaper \
 qdbus6 org.kde.KWin /KWin reconfigure 2>/dev/null \
   || qdbus org.kde.KWin /KWin reconfigure 2>/dev/null || true
 
-# Launcher icon = the face; panel floats
-JS='applets().filter(function(a){return a.pluginName.indexOf("kickoff")>=0||a.pluginName.indexOf("kicker")>=0}).forEach(function(a){a.currentConfigGroup=["General"];a.writeConfig("icon","'"$HOME"'/.local/share/mados/face.png")});panels().forEach(function(p){p.floating=true});'
-qdbus6 org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "$JS" \
-  2>/dev/null || true
+# Launcher icon = the face; panel floats. Done by patching the
+# shell's appletsrc directly: Plasma 6.8's evaluateScript context has
+# no applets() global (verified on the TV machine), so the JS route
+# errors out. Patch, then restart the shell to load it.
+python3 - "$HOME" <<'PYEOF' || true
+import re, sys
+home = sys.argv[1]
+p = home + '/.config/plasma-org.kde.plasma.desktop-appletsrc'
+try:
+    lines = open(p).read().split('\n')
+except FileNotFoundError:
+    raise SystemExit(0)
+sec = None
+kick = None
+for ln in lines:
+    m = re.match(r'\[Containments\]\[(\d+)\]\[Applets\]\[(\d+)\]$', ln.strip())
+    if m:
+        sec = (m.group(1), m.group(2))
+    if sec and ln.strip() in ('plugin=org.kde.plasma.kickoff',
+                              'plugin=org.kde.plasma.kicker'):
+        kick = sec
+if kick:
+    c, a = kick
+
+    def set_key(section, key, val):
+        global lines
+        if section not in lines:
+            lines.extend(['', section, key + '=' + val])
+            return
+        i = lines.index(section)
+        j = i + 1
+        while j < len(lines) and not lines[j].startswith('['):
+            if lines[j].startswith(key + '='):
+                lines[j] = key + '=' + val
+                return
+            j += 1
+        lines.insert(i + 1, key + '=' + val)
+
+    set_key('[Containments][%s][Applets][%s][Configuration][General]' % (c, a),
+            'icon', home + '/.local/share/mados/face.png')
+    set_key('[Containments][%s]' % c, 'floating', '1')
+    open(p, 'w').write('\n'.join(lines))
+PYEOF
 kbuildsycoca6 --noincremental >/dev/null 2>&1 || true
+if qdbus6 org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript \
+    'print("shell-ok")' >/dev/null 2>&1; then
+  kquitapp6 plasmashell 2>/dev/null || true
+  sleep 2
+  (setsid plasmashell >/dev/null 2>&1 &)
+fi
 
 echo "MadOS Sakura applied in full: scheme, wallpaper (desktop + lock),"
 echo "icons, blossom buttons, Konsole, face, cursors, bells, font, splash."

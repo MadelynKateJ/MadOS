@@ -33,9 +33,15 @@ session any time with `apply-sakura.sh`.
   volume changes and dialogs. Try the volume keys after applying.
 - **Font** — Comfortaa as the UI font (user-local install, best
   effort).
-- **Splash** — `ksplash/MadOSSakura/`: the loading screen after login,
-  blossom wallpaper behind a blush card with the MadOS wordmark and
-  three pulsing pink dots.
+- **Splash** — `look-and-feel/org.mados.sakura/`: the loading screen
+  after login, blossom wallpaper behind a blush card with the MadOS
+  wordmark and three pulsing pink dots. It ships as a look-and-feel
+  package because Plasma 6.8 dropped the old ksplash theme folders
+  entirely (there is no /usr/share/ksplash on the neon build —
+  verified on the first MadOS machine). Only the splash lives in the
+  package; everything else applies piece by piece.
+- **Power default** — the screen locks after 2 hours idle
+  (kscreenlockerrc Timeout 7200), not Plasma's 5 minutes.
 - **Login + boot (root, optional)** — `sakura-system.sh` builds an
   SDDM theme and a GRUB theme from `mados-sakura-dusk.jpg` (the same
   blossoms at night, so white login text stays readable) and sets the

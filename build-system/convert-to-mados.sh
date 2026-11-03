@@ -158,7 +158,7 @@ if [ "$TARGET_USER" != "root" ] && id "$TARGET_USER" >/dev/null 2>&1; then
   # Round 2 pieces: face (launcher + avatar), Konsole scheme, bells,
   # splash, cursors, UI font.
   mkdir -p "$UHOME/.local/share/mados" "$UHOME/.local/share/konsole" \
-           "$UHOME/.local/share/sounds" "$UHOME/.local/share/ksplash/Themes" \
+           "$UHOME/.local/share/sounds" "$UHOME/.local/share/plasma" \
            "$UHOME/.local/share/fonts"
   cp "$SK/face.png" "$UHOME/.local/share/mados/face.png"
   cp "$SK/face.png" "$UHOME/.face.icon"
@@ -171,8 +171,12 @@ if [ "$TARGET_USER" != "root" ] && id "$TARGET_USER" >/dev/null 2>&1; then
   fi
   rm -rf "$UHOME/.local/share/sounds/mados-bells"
   cp -r "$SK/sounds/mados-bells" "$UHOME/.local/share/sounds/"
-  rm -rf "$UHOME/.local/share/ksplash/Themes/MadOSSakura"
-  cp -r "$SK/ksplash/MadOSSakura" "$UHOME/.local/share/ksplash/Themes/"
+  # Splash ships as a look-and-feel package (Plasma 6.8 dropped the
+  # old ksplash/Themes path entirely).
+  rm -rf "$UHOME/.local/share/plasma/look-and-feel/org.mados.sakura"
+  mkdir -p "$UHOME/.local/share/plasma/look-and-feel"
+  cp -r "$SK/look-and-feel/org.mados.sakura" \
+    "$UHOME/.local/share/plasma/look-and-feel/"
   if [ ! -d "$UHOME/.local/share/icons/catppuccin-latte-flamingo-cursors" ]; then
     if curl -fsSL -o /tmp/ctp-cursors.zip \
         https://github.com/catppuccin/cursors/releases/download/v2.0.0/catppuccin-latte-flamingo-cursors.zip; then
@@ -202,7 +206,14 @@ if [ "$TARGET_USER" != "root" ] && id "$TARGET_USER" >/dev/null 2>&1; then
   as_user kwriteconfig6 --file kdeglobals --group Sounds \
     --key Theme mados-bells || true
   as_user kwriteconfig6 --file ksplashrc --group KSplash \
-    --key Theme MadOSSakura || true
+    --key Theme org.mados.sakura || true
+  # MadOS power default: lock after 2 hours idle, not 5 minutes
+  as_user kwriteconfig6 --file kscreenlockerrc --group Daemon \
+    --key Autolock true || true
+  as_user kwriteconfig6 --file kscreenlockerrc --group Daemon \
+    --key Timeout 7200 || true
+  as_user kwriteconfig6 --file kscreenlockerrc --group Daemon \
+    --key LockOnResume false || true
   as_user kwriteconfig6 --file ksplashrc --group KSplash \
     --key Engine KSplashQML || true
   as_user kwriteconfig6 --file kscreenlockerrc --group Greeter \
@@ -234,9 +245,47 @@ if [ "$TARGET_USER" != "root" ] && id "$TARGET_USER" >/dev/null 2>&1; then
   as_user plasma-apply-wallpaperimage \
     "$UHOME/Pictures/mados-sakura-wallpaper.jpg" || true
   as_user qdbus6 org.kde.KWin /KWin reconfigure || true
-  JS='applets().filter(function(a){return a.pluginName.indexOf("kickoff")>=0||a.pluginName.indexOf("kicker")>=0}).forEach(function(a){a.currentConfigGroup=["General"];a.writeConfig("icon","'"$UHOME"'/.local/share/mados/face.png")});panels().forEach(function(p){p.floating=true});'
-  as_user qdbus6 org.kde.plasmashell /PlasmaShell \
-    org.kde.PlasmaShell.evaluateScript "$JS" || true
+  # Launcher icon = the face; panel floats. Patch the shell's
+  # appletsrc directly (Plasma 6.8's evaluateScript has no applets()
+  # global). Applies at the next login / shell start.
+  if [ -f "$UHOME/.config/plasma-org.kde.plasma.desktop-appletsrc" ]; then
+    python3 - "$UHOME" <<'PYEOF' || true
+import re, sys
+home = sys.argv[1]
+p = home + '/.config/plasma-org.kde.plasma.desktop-appletsrc'
+lines = open(p).read().split('\n')
+sec = None
+kick = None
+for ln in lines:
+    m = re.match(r'\[Containments\]\[(\d+)\]\[Applets\]\[(\d+)\]$', ln.strip())
+    if m:
+        sec = (m.group(1), m.group(2))
+    if sec and ln.strip() in ('plugin=org.kde.plasma.kickoff',
+                              'plugin=org.kde.plasma.kicker'):
+        kick = sec
+if kick:
+    c, a = kick
+
+    def set_key(section, key, val):
+        global lines
+        if section not in lines:
+            lines.extend(['', section, key + '=' + val])
+            return
+        i = lines.index(section)
+        j = i + 1
+        while j < len(lines) and not lines[j].startswith('['):
+            if lines[j].startswith(key + '='):
+                lines[j] = key + '=' + val
+                return
+            j += 1
+        lines.insert(i + 1, key + '=' + val)
+
+    set_key('[Containments][%s][Applets][%s][Configuration][General]' % (c, a),
+            'icon', home + '/.local/share/mados/face.png')
+    set_key('[Containments][%s]' % c, 'floating', '1')
+    open(p, 'w').write('\n'.join(lines))
+PYEOF
+  fi
 fi
 
 say "DONE"
