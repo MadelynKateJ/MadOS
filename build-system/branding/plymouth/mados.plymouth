@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=MadOS
+Description=MadOS - Surprisingly Functional
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/mados
+ScriptFile=/usr/share/plymouth/themes/mados/mados.script

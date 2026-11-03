@@ -1,0 +1,29 @@
+${c1}                    ;,_            ,
+${c1}                 _uP~"b          d"u,
+${c1}                dP'   "b       ,d"  "o
+${c1}               d"    , `b     d"'    "b
+${c1}              l] [    " `l,  d"       lb
+${c1}              Ol ?     "  "b`"=uoqo,_  "l
+${c1}            ,dBb "b        "b,    `"~~TObup,_
+${c1}          ,d" (db.`"         ""     "tbc,_ `~"Yuu,_
+${c1}        .d" l`T'  '=                      ~     `""Yu,
+${c1}      ,dO` gP,                           `u,   b,_  "b7
+${c1}     d?' ,d" l,                           `"b,_ `~b  "1
+${c1}   ,8i' dl   `l                 ,ggQOV",dbgq,._"  `l  lb
+${c1}  .df' (O,    "             ,ggQY"~  , @@@@@d"bd~  `b "1
+${c1} .df'   `"           -=@QgpOY""     (b  @@@@P db    `Lp"b,
+${c1}.d(                  _               "ko "=d_,Q`  ,_  "  "b,
+${c1}Ql         .         `"qo,._          "tQo,_`""bo ;tb,    `"b,
+${c1}qQ         |L           ~"QQQgggc,_.,dObc,opooO  `"~~";.   __,7,
+${c1}qp         t\io,_           `~"TOOggQV""""        _,dg,_ =PIQHib.
+${c1}`qp        `Q["tQQQo,_                          ,pl{QOP"'   7AFR`
+${c1}  `         `tb  '""tQQQg,_             p" "b   `       .;-.`Vl'
+${c1}             "Yb      `"tQOOo,__    _,edb    ` .__   /`/'|  |b;=;.__
+${c1}                           `"tQQQOOOOP""`"\QV;qQObob"`-._`\_~~-._
+${c1}                                """"    ._        /   | |oP"\_   ~\ ~\_~\
+${c1}                                        `~"\ic,qggddOOP"|  |  ~\   `\~-._
+${c1}                                          ,qP`"""|"   | `\ `;   `\   `\
+${c1}                               _        _,p"     |    |   `\`;    |    |
+${c1}                               "boo,._dP"       `\_  `\    `\|   `\   ;
+${c1}                                 `"7tY~'            `\  `\    `|_   |
+${c1}                                                      `~\  |
