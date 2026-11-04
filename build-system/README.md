@@ -89,3 +89,15 @@ and the neon base-upgrade question).
   ISO distribution gets its own shelf later.
 - Pipeline scripts and this documentation were developed with Kat
   during the 0.1.0-alpha build sessions in Madelyn's home lab.
+
+## Sakura edition ISO (2026-11-03)
+
+`mados-0.1.0-alpha-sakura-amd64.iso` — MD5
+`a72c96774ff869bf6362b90605e50c2e`. The v0.1.0-alpha image with the
+Sakura tree staged at `/usr/share/mados/sakura/` plus the skel
+first-login autostart (see `iso/stage-sakura.sh`), so a fresh
+install boots into the full theme. Verified live 2026-11-03: the
+live session itself applies Sakura (wallpaper, scheme, decoration,
+panel, clock) within about two minutes of first login. The plain
+v0.1.0-alpha ISO (MD5 `6edf961c86256729f33a776bebfe6bf7`) is
+unchanged and kept alongside it.
