@@ -282,3 +282,9 @@ bash "$HERE/blossom-terminal.sh"
 # 21. Ghost Dolphin.
 python3 "$HERE/ghost-dolphin.py"
 qdbus6 org.kde.KWin /KWin reconfigure || true
+
+# 22. Kate editor theme (KSyntaxHighlighting JSON theme + katepartrc).
+mkdir -p "$HOME/.local/share/org.kde.syntax-highlighting/themes"
+cp "$HERE/kate/MadOS-Sakura.theme" "$HOME/.local/share/org.kde.syntax-highlighting/themes/"
+kwriteconfig6 --file katepartrc --group "KTextEditor Renderer" \
+  --key "Color Theme" "MadOS Sakura" || true

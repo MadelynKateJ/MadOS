@@ -288,10 +288,37 @@ PYEOF
   fi
 fi
 
+# --- Stage 8b: stage the full Sakura tree + first-login apply ---------------
+# Stage 8 above sets the config keys for rounds 1-2. The rest of the
+# theme (desktop theme, Papirus folders, widgets, Firefox, Kate, ...)
+# lives in branding/sakura/apply-sakura.sh and needs a live Plasma
+# session, so it runs once at the user's first login instead. This is
+# the same mechanism the MadOS ISO uses, so both routes converge.
+say "stage 8b/8: Sakura first-login setup"
+if [ "$TARGET_USER" != "root" ] && id "$TARGET_USER" >/dev/null 2>&1; then
+  UHOME="${UHOME:-$(getent passwd "$TARGET_USER" | cut -d: -f6)}"
+  mkdir -p "$UHOME/.local/share/mados" "$UHOME/.config/autostart"
+  rm -rf "$UHOME/.local/share/mados/sakura"
+  cp -r "$BS/branding/sakura" "$UHOME/.local/share/mados/sakura"
+  cp "$BS/branding/sakura/first-login.sh" "$UHOME/.local/share/mados/first-login.sh"
+  chmod +x "$UHOME/.local/share/mados/first-login.sh"
+  cat > "$UHOME/.config/autostart/mados-sakura.desktop" <<'DEOF'
+[Desktop Entry]
+Type=Application
+Name=MadOS Sakura first-login setup
+Exec=bash $HOME/.local/share/mados/first-login.sh
+X-KDE-autostart-phase=2
+NoDisplay=true
+DEOF
+  chown -R "$TARGET_USER":"$TARGET_USER" "$UHOME/.local/share/mados" \
+    "$UHOME/.config/autostart/mados-sakura.desktop"
+fi
+
 say "DONE"
 echo "This system is now MadOS 0.1.0-alpha. Reboot to see it:"
 echo "  sudo reboot"
 echo "Mint Welcome is still installed (kept on purpose until mados-welcome"
 echo "is finished). Everything else Mint-branded is gone."
 echo "The default look is MadOS Sakura: blossom wallpaper, blush colors,"
-echo "Candy icons, and flower window buttons (bud, half-open, full bloom)."
+echo "flower window buttons (bud, half-open, full bloom), and the rest of"
+echo "the theme finishes itself at your first login."

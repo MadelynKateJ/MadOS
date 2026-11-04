@@ -49,3 +49,13 @@
   matches the metapackage dependency name.
 - Your .git history stayed in ~/MadOS-src (the working copy of the NAS
   folder), not in the image.
+
+## Sakura in the image
+
+`stage-sakura.sh <Cubic project>` copies `branding/sakura/` into the
+image at `/usr/share/mados/sakura/` and plants a skel autostart that
+runs `apply-sakura.sh` once at each new user's first login (marker:
+`~/.config/mados-sakura-done`). The Mint converter uses the same
+first-login mechanism (its stage 8b), so a converted Mint and a fresh
+ISO install converge on the identical desktop. Run stage-sakura.sh
+after customization, before generating the ISO.
