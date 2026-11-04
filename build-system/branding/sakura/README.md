@@ -116,3 +116,19 @@ before writing, and applies with `plasma-apply-desktoptheme`.
 - The old picture-frame desktop widget was retired by KDE in
   Plasma 6 (not shipped in kdeplasma-addons 6.8), so there is no
   framed-photo widget; the desktop clock carries the corner.
+
+## Round 5: widgets, blossom terminal, ghost Dolphin
+
+- **Desktop widgets** (`desktop-widgets.py`, step 19): clock, a
+  sticky note that says **MKJ** on pink paper, the media frame
+  showing the ASCII cat, a media controller, and weather (which
+  still needs its location picked once, in its own settings).
+  The script header documents the three traps: configparser
+  section names have no trailing bracket, the notes applet stores
+  its text in `~/.local/share/plasma_notes/<id>` as rich text, and
+  MediaFrame reads a JSON `pathList` under `[Configuration][Paths]`.
+- **Blossom terminal** (step 20): a *separate* Konsole profile with
+  the sakura wallpaper inside it. The main profile is untouched at
+  0% opacity, per the standing order.
+- **Ghost Dolphin** (step 21): a KWin rule makes Dolphin 85%
+  opaque active, 78% inactive.

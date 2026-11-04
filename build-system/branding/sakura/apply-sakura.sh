@@ -268,3 +268,17 @@ kwriteconfig6 --file kwinrc --group Plugins --key wobblywindowsEnabled true
 kwriteconfig6 --file kwinrc --group Plugins --key magiclampEnabled true
 kwriteconfig6 --file kwinrc --group Effect-Blur --key BlurStrength 13
 qdbus6 org.kde.KWin /KWin reconfigure || true
+
+# 19. Desktop widgets (shell stopped: its exit-save eats edits).
+#     Sticky note says MKJ and is pink; media frame shows the cat.
+kquitapp6 plasmashell || true
+sleep 3
+python3 "$HERE/desktop-widgets.py"
+(setsid plasmashell >/dev/null 2>&1 &)
+
+# 20. Blossom terminal profile (main terminal stays at 0% opacity).
+bash "$HERE/blossom-terminal.sh"
+
+# 21. Ghost Dolphin.
+python3 "$HERE/ghost-dolphin.py"
+qdbus6 org.kde.KWin /KWin reconfigure || true
