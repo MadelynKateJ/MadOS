@@ -248,3 +248,23 @@ ENVV="DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$UIDN/bus"
 
 # 16. A clock on the desktop.
 python3 "$HERE/add-clock.py" || true
+
+# 17. Pink Firefox, wherever its profile lives (regular, XDG or Flatpak).
+for BASE in "$HOME/.config/mozilla/firefox" "$HOME/.mozilla/firefox" \
+            "$HOME/.var/app/org.mozilla.firefox/.mozilla/firefox" \
+            "$HOME/.var/app/org.mozilla.firefox/.config/mozilla/firefox"; do
+  for PROF in "$BASE"/*.default*; do
+    [ -d "$PROF" ] || continue
+    mkdir -p "$PROF/chrome"
+    cp "$HERE/firefox/userChrome.css" "$PROF/chrome/userChrome.css"
+    cp "$HERE/firefox/userContent.css" "$PROF/chrome/userContent.css"
+    grep -q 'legacyUserProfileCustomizations' "$PROF/user.js" 2>/dev/null || \
+      echo 'user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);' >> "$PROF/user.js"
+  done
+done
+
+# 18. Jelly windows, magic-lamp minimize, dreamier blur.
+kwriteconfig6 --file kwinrc --group Plugins --key wobblywindowsEnabled true
+kwriteconfig6 --file kwinrc --group Plugins --key magiclampEnabled true
+kwriteconfig6 --file kwinrc --group Effect-Blur --key BlurStrength 13
+qdbus6 org.kde.KWin /KWin reconfigure || true

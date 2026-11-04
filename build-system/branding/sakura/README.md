@@ -101,3 +101,18 @@ before writing, and applies with `plasma-apply-desktoptheme`.
   desktop containment (step 16).
 - `sakura-system.sh` also installs the MadOS mark as the distro logo
   (os-release LOGO + hicolor icons) for About This System.
+
+## Round 4: Firefox, jelly, petals on the panel
+
+- **Pink Firefox** — `firefox/userChrome.css` + `userContent.css`
+  (rose gradient toolbars, pink new-tab page), installed into every
+  profile found under the regular, XDG and Flatpak locations, with
+  the legacy-stylesheets pref enabled (step 17). MadOS's Firefox
+  keeps its profile in `~/.config/mozilla/firefox`.
+- **Jelly windows** — KWin wobbly windows + magic lamp minimize, and
+  the blur strength raised to 13 for the ghost terminal (step 18).
+- **Petal panel** — the desktop-theme patcher now tucks a few small
+  petals into the panel background too.
+- The old picture-frame desktop widget was retired by KDE in
+  Plasma 6 (not shipped in kdeplasma-addons 6.8), so there is no
+  framed-photo widget; the desktop clock carries the corner.

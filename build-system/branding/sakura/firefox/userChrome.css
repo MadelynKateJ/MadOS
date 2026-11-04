@@ -1,0 +1,34 @@
+/* MadOS Sakura for Firefox: soft rose toolbars, plum text. */
+:root {
+  --toolbar-bgcolor: #F8A9CF !important;
+  --toolbar-color: #5D3446 !important;
+  --tab-selected-bgcolor: #FDF3F8 !important;
+  --tab-text-color: #8A5570 !important;
+  --tab-selected-text-color: #5D3446 !important;
+  --toolbarbutton-icon-fill: #7A3A58 !important;
+  --urlbar-box-bgcolor: #FDF3F8 !important;
+  --arrowpanel-background: #FCE4F0 !important;
+  --arrowpanel-color: #5D3446 !important;
+  --button-bgcolor: #FBDCEB !important;
+  --button-hover-bgcolor: #F9A8D4 !important;
+  --input-bgcolor: #FFF7FA !important;
+  --focus-outline-color: #EC4899 !important;
+}
+#navigator-toolbox {
+  background: linear-gradient(180deg, #F9BEDC 0%, #F8A9CF 100%) !important;
+  border-bottom: 1px solid #E87EA8 !important;
+}
+#TabsToolbar { background: transparent !important; }
+.tab-background[selected="true"] {
+  background: #FDF3F8 !important;
+  border: 1px solid #E87EA8 !important;
+  border-bottom: none !important;
+}
+#urlbar-background {
+  background: #FFF7FA !important;
+  border: 1px solid #E87EA8 !important;
+}
+#urlbar[focused="true"] > #urlbar-background {
+  border-color: #EC4899 !important;
+  box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.35) !important;
+}

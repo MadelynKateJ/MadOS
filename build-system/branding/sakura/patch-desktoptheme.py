@@ -27,6 +27,13 @@ def blossom(cx, cy, r, fill, op):
     parts.append("</g>")
     return "".join(parts)
 
+def panel_motif():
+    return (
+        blossom(26.0, 8.0, 1.7, "#E7548A", 0.32)
+        + '<ellipse cx="17" cy="5" rx="0.8" ry="1.2" fill="#E7548A" fill-opacity="0.25" transform="rotate(24 17 5)"/>'
+        + '<ellipse cx="10" cy="11" rx="0.7" ry="1.1" fill="#E7548A" fill-opacity="0.22" transform="rotate(-18 10 11)"/>'
+    )
+
 def motif():
     return (
         blossom(26.0, 8.0, 3.4, "#E7548A", 0.52)
@@ -52,7 +59,7 @@ def patch_svgz(path, pink, with_blossoms):
     if with_blossoms:
         m = re.search(r'<g\s[^>]*\bid="center"[^>]*>', svg)
         if m:
-            svg = svg[:m.end()] + motif() + svg[m.end():]
+            svg = svg[:m.end()] + (panel_motif() if os.path.basename(os.path.dirname(path)) == "widgets" or "panel" in os.path.basename(path) else motif()) + svg[m.end():]
     if svg == original:
         print("no-change:", path)
         return False
@@ -88,7 +95,7 @@ def main():
             ok += 1
             print("patched dialog:", variant or "root")
         p = os.path.join(DST, variant, "widgets", "panel-background.svgz")
-        if os.path.isfile(p) and patch_svgz(p, PANEL_PINK, False):
+        if os.path.isfile(p) and patch_svgz(p, PANEL_PINK, True):
             ok += 1
             print("patched panel:", variant or "root")
     print("patched OK:", ok)
