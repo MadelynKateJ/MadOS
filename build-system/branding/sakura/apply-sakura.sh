@@ -218,6 +218,16 @@ if [ -d "$HOME/.local/share/icons/Papirus" ]; then
     kwriteconfig6 --file kdeglobals --group Icons --key Theme Papirus
 fi
 
+# 13b. Soften the folder pink (stock Papirus pink is a bit hot):
+#      #f06292 -> #F194BC, #ec407a -> #E87EA8 across the pink folders.
+for T in Papirus Papirus-Light Papirus-Dark; do
+  D="$HOME/.local/share/icons/$T"
+  [ -d "$D" ] || continue
+  find "$D" -path '*places*' -name 'folder-pink*.svg' -print0 | while IFS= read -r -d '' f; do
+    sed -i 's/#f06292/#F194BC/g; s/#F06292/#F194BC/g; s/#ec407a/#E87EA8/g; s/#EC407A/#E87EA8/g' "$f"
+  done
+done
+
 # 14. Pink shell prompt.
 if ! grep -q 'MadOS Sakura prompt' "$HOME/.bashrc"; then
 cat >> "$HOME/.bashrc" <<'PROMPT'
