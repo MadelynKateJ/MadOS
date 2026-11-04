@@ -13,13 +13,13 @@
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
      id="namedview193"
-     pagecolor="#ffeef6"
-     bordercolor="#c083a3"
+     pagecolor="#fff8fb"
+     bordercolor="#c79bb1"
      borderopacity="1.0"
      inkscape:showpageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#f0b4d1"
+     inkscape:deskcolor="#f2c4d8"
      showgrid="false"
      inkscape:zoom="1.0766271"
      inkscape:cx="621.38507"
@@ -39,37 +39,37 @@
     <linearGradient
        id="shadow_active">
       <stop
-         stop-color="#000000"
+         stop-color="#7A2A52"
          stop-opacity=".92169"
          offset="0"
          id="stop2" />
       <stop
-         stop-color="#000000"
+         stop-color="#7A2A52"
          stop-opacity=".74096"
          offset=".125"
          id="stop4" />
       <stop
-         stop-color="#000000"
+         stop-color="#7A2A52"
          stop-opacity=".60241"
          offset=".25"
          id="stop6" />
       <stop
-         stop-color="#000000"
+         stop-color="#7A2A52"
          stop-opacity=".33133"
          offset=".5"
          id="stop8" />
       <stop
-         stop-color="#000000"
+         stop-color="#7A2A52"
          stop-opacity=".10843"
          offset=".75"
          id="stop10" />
       <stop
-         stop-color="#000000"
+         stop-color="#7A2A52"
          stop-opacity=".039216"
          offset=".875"
          id="stop12" />
       <stop
-         stop-color="#000000"
+         stop-color="#7A2A52"
          stop-opacity="0"
          offset="1"
          id="stop14" />
@@ -95,31 +95,31 @@
     <linearGradient
        id="shadow_inactive">
       <stop
-         stop-color="#000000"
+         stop-color="#7A2A52"
          offset="0"
          id="stop19" />
       <stop
-         stop-color="#000000"
+         stop-color="#7A2A52"
          stop-opacity=".63855"
          offset=".25"
          id="stop21" />
       <stop
-         stop-color="#000000"
+         stop-color="#7A2A52"
          stop-opacity=".33735"
          offset=".5"
          id="stop23" />
       <stop
-         stop-color="#000000"
+         stop-color="#7A2A52"
          stop-opacity=".10843"
          offset=".75"
          id="stop25" />
       <stop
-         stop-color="#000000"
+         stop-color="#7A2A52"
          stop-opacity=".039216"
          offset=".875"
          id="stop27" />
       <stop
-         stop-color="#000000"
+         stop-color="#7A2A52"
          stop-opacity="0"
          offset="1"
          id="stop29" />
@@ -210,12 +210,12 @@
         <path
            transform="translate(-121,89.063)"
            d="m453 86c-6.648 0-12 5.352-12 12v18h29v-30z"
-           fill="#ffd9e9"
+           fill="#fdeef5"
            id="path44" />
         <path
            transform="translate(-121,89.063)"
            d="m453 86c-6.648 0-12 5.352-12 12v1c0-6.648 5.352-12 12-12h17v-1z"
-           fill="#ffeef6"
+           fill="#fff8fb"
            opacity=".08"
            id="path46" />
       </g>
@@ -223,7 +223,7 @@
     <path
        transform="translate(-140,121.06)"
        d="m453 79c-7.202 0-13 5.798-13 13v18h1v-18c0-6.648 5.352-12 12-12h17v-1z"
-       fill="#000000"
+       fill="#7A2A52"
        opacity=".08"
        id="path52" />
   </g>
@@ -238,13 +238,13 @@
     <path
        transform="matrix(-1,0,0,1,604.88,81)"
        d="m284 116v86h1v-86z"
-       fill="#000000"
+       fill="#7A2A52"
        opacity=".15"
        id="path57" />
     <path
        transform="translate(-255.12,76)"
        d="m576 121v86h29v-86z"
-       fill="#ffeef6"
+       fill="#fff8fb"
        id="path59" />
   </g>
   <g
@@ -257,19 +257,19 @@
        id="path62" />
     <path
        d="m470 289h-145v1h145z"
-       fill="#000000"
+       fill="#7A2A52"
        opacity=".15"
        id="path64" />
     <path
        d="m470 277h-145v12h145z"
-       fill="#ffd9e9"
+       fill="#fdeef5"
        opacity=".75"
        id="path66" />
   </g>
   <path
      id="decoration-center"
      d="m105 110v86h145v-86z"
-     fill="#ffeef6" />
+     fill="#fff8fb" />
   <g
      id="decoration-top"
      transform="translate(-220,-96)">
@@ -282,16 +282,16 @@
     <path
        transform="translate(215,90)"
        d="m110 85v1h145v-1z"
-       fill="#000000"
+       fill="#7A2A52"
        opacity=".15"
        id="path72" />
     <path
        d="m325 176v30h145v-30z"
-       fill="#ffeef6"
+       fill="#fff8fb"
        id="path74" />
     <path
        d="m325 176v1h145v-1z"
-       fill="#ffeef6"
+       fill="#fff8fb"
        opacity=".1"
        id="path76" />
   </g>
@@ -306,13 +306,13 @@
     <path
        transform="translate(239.88,81)"
        d="m80 116v86h1v-86z"
-       fill="#000000"
+       fill="#7A2A52"
        opacity=".15"
        id="path81" />
     <path
        transform="translate(-255.12,76)"
        d="m576 121v86h29v-86z"
-       fill="#ffeef6"
+       fill="#fff8fb"
        id="path83" />
   </g>
   <g
@@ -325,19 +325,19 @@
        id="path86" />
     <path
        d="m470 288.92h-145v1h145z"
-       fill="#000000"
+       fill="#7A2A52"
        opacity=".08"
        id="path88" />
     <path
        d="m470 276.92h-145v12h145z"
-       fill="#ffd9e9"
+       fill="#fdeef5"
        opacity=".75"
        id="path90" />
   </g>
   <path
      id="decoration-inactive-center"
      d="m470 110v86h145v-86z"
-     fill="#ffd9e9" />
+     fill="#fdeef5" />
   <g
      id="decoration-inactive-top"
      transform="translate(145,-96)">
@@ -350,16 +350,16 @@
     <path
        transform="translate(-145,90)"
        d="m470 85v1h145v-1z"
-       fill="#000000"
+       fill="#7A2A52"
        opacity=".08"
        id="path96" />
     <path
        d="m325 176v30h145v-30z"
-       fill="#ffd9e9"
+       fill="#fdeef5"
        id="path98" />
     <path
        d="m325 176v1h145v-1z"
-       fill="#ffeef6"
+       fill="#fff8fb"
        opacity=".08"
        id="path100" />
   </g>
@@ -373,12 +373,12 @@
        id="path103" />
     <path
        d="m319.88 197.02v86h1v-86z"
-       fill="#000000"
+       fill="#7A2A52"
        opacity=".08"
        id="path105" />
     <path
        d="m320.88 197.02v86h29v-86z"
-       fill="#ffd9e9"
+       fill="#fdeef5"
        id="path107" />
   </g>
   <g
@@ -387,7 +387,7 @@
     <path
        transform="translate(385,94)"
        d="m81 196c0 6.648 5.352 12 12 12h17v-12z"
-       fill="#ffd9e9"
+       fill="#fdeef5"
        opacity=".75"
        id="path110" />
     <g
@@ -402,7 +402,7 @@
       <path
          transform="matrix(1,0,0,1.0007,220,104.74)"
          d="m80 196c0 7.202 5.798 13 13 13h17v-1h-17c-6.648 0-12-5.352-12-12z"
-         fill="#000000"
+         fill="#7A2A52"
          opacity=".15"
          id="path114" />
     </g>
@@ -413,7 +413,7 @@
     <path
        transform="translate(0,90)"
        d="m441 196c0 6.648 5.352 12 12 12h17v-12z"
-       fill="#ffd9e9"
+       fill="#fdeef5"
        opacity=".75"
        id="path119" />
     <g
@@ -429,7 +429,7 @@
       <path
          transform="matrix(1,0,0,1.0007,-140,104.68)"
          d="m440 196c0 7.202 5.798 13 13 13h14l3-1e-5v-0.99999h-17c-6.648 0-12-5.352-12-12z"
-         fill="#000000"
+         fill="#7A2A52"
          opacity=".08"
          id="path123" />
     </g>
@@ -505,7 +505,7 @@
        id="g144">
       <g
          transform="matrix(-1,0,0,1,524,26)"
-         fill="#ffeef6"
+         fill="#fff8fb"
          id="g142">
         <path
            transform="translate(239,89.062)"
@@ -521,7 +521,7 @@
     <path
        transform="matrix(-1,0,0,1,535,115.06)"
        d="m93 85c-7.202 0-13 5.798-13 13v18h1v-18c0-6.648 5.352-12 12-12h17v-1z"
-       fill="#000000"
+       fill="#7A2A52"
        opacity=".15"
        id="path146" />
   </g>
@@ -535,12 +535,12 @@
        id="path149" />
     <path
        d="m319.88 197.02v86h1v-86z"
-       fill="#000000"
+       fill="#7A2A52"
        opacity=".08"
        id="path151" />
     <path
        d="m320.88 197.02v86h29v-86z"
-       fill="#ffd9e9"
+       fill="#fdeef5"
        id="path153" />
   </g>
   <use

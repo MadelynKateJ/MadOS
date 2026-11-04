@@ -90,3 +90,18 @@ if [ -n "$U" ] && id "$U" >/dev/null 2>&1; then
   echo "System avatar set for $U."
 fi
 echo "All done. The login screen and boot menu change on next boot."
+
+# Distro logo for About This System / Info Center: point os-release at
+# the MadOS mark and install it (plus the classic distributor-logo name)
+# into the hicolor theme.
+if [ -f "$HERE/cat.png" ]; then
+  if grep -q '^LOGO=' /etc/os-release; then
+    sed -i 's/^LOGO=.*/LOGO=mados/' /etc/os-release
+  else
+    echo 'LOGO=mados' >> /etc/os-release
+  fi
+  install -D -m644 "$HERE/cat.png" /usr/share/icons/hicolor/128x128/apps/mados.png
+  install -D -m644 "$HERE/cat.png" /usr/share/icons/hicolor/128x128/apps/distributor-logo.png
+  gtk-update-icon-cache -q /usr/share/icons/hicolor 2>/dev/null || true
+  echo "logo: installed"
+fi

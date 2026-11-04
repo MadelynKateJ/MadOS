@@ -199,3 +199,42 @@ if [ -f "$HERE/patch-desktoptheme.py" ]; then
   plasma-apply-desktoptheme MadOSSakura 2>/dev/null || \
     kwriteconfig6 --file plasmarc --group Theme --key name MadOSSakura
 fi
+
+# 13. Pink folders: Papirus icon theme with the pink folder set.
+#     (Reversible: plasma-apply-icontheme candy-icons.)
+if [ ! -d "$HOME/.local/share/icons/Papirus" ]; then
+  cd /tmp
+  curl -fsSL -o papirus.tar.gz https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive/refs/tags/20260801.tar.gz
+  rm -rf /tmp/papirus-src && mkdir -p /tmp/papirus-src
+  tar -xzf papirus.tar.gz -C /tmp/papirus-src --strip-components=1
+  mkdir -p "$HOME/.local/share/icons"
+  cp -r /tmp/papirus-src/Papirus /tmp/papirus-src/Papirus-Dark /tmp/papirus-src/Papirus-Light "$HOME/.local/share/icons/"
+fi
+if [ -d "$HOME/.local/share/icons/Papirus" ]; then
+  curl -fsSL -o /tmp/papirus-folders https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-folders/master/papirus-folders
+  chmod +x /tmp/papirus-folders
+  /tmp/papirus-folders -C pink --theme Papirus </dev/null || true
+  plasma-apply-icontheme Papirus || \
+    kwriteconfig6 --file kdeglobals --group Icons --key Theme Papirus
+fi
+
+# 14. Pink shell prompt.
+if ! grep -q 'MadOS Sakura prompt' "$HOME/.bashrc"; then
+cat >> "$HOME/.bashrc" <<'PROMPT'
+
+# MadOS Sakura prompt: soft pink blossom
+PS1='\[\e[38;5;218m\]❀ \[\e[38;5;211m\]\u@\h\[\e[0m\] \[\e[38;5;225m\]\w\[\e[0m\] \[\e[38;5;218m\]❯\[\e[0m\] '
+PROMPT
+fi
+
+# 15. Day/dusk wallpaper pair, auto-switching at 07:00 and 17:00.
+mkdir -p "$HOME/Pictures"
+cp "$HERE/mados-sakura-dusk.jpg" "$HOME/Pictures/" 2>/dev/null || true
+UIDN=$(id -u)
+ENVV="DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$UIDN/bus"
+( crontab -l 2>/dev/null | grep -v 'mados-sakura' ; \
+  echo "0 7 * * * $ENVV plasma-apply-wallpaperimage $HOME/Pictures/mados-sakura-wallpaper.jpg # mados-sakura-day" ; \
+  echo "0 17 * * * $ENVV plasma-apply-wallpaperimage $HOME/Pictures/mados-sakura-dusk.jpg # mados-sakura-dusk" ) | crontab -
+
+# 16. A clock on the desktop.
+python3 "$HERE/add-clock.py" || true

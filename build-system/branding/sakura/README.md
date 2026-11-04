@@ -87,3 +87,17 @@ stay properly pink regardless of the (paler) window color scheme, and
 a small blossom cluster is tucked into the dialog background's center
 tile. It copies the pristine system theme each run, validates the XML
 before writing, and applies with `plasma-apply-desktoptheme`.
+
+## Round 3: folders, prompt, glow, wallpaper pair, clock
+
+- **Pink folders** — Papirus icon theme with the pink folder set
+  (step 13; Candy is one `plasma-apply-icontheme candy-icons` away).
+- **Pink shell prompt** — a ❀ blossom prompt in soft pinks (step 14).
+- **Pink window glow** — the Aurorae decoration's shadow artwork is
+  tinted plum (#7A2A52) instead of black.
+- **Day/dusk wallpapers** — pale blossoms by day, the deep plum dusk
+  version from 17:00, switched by two user cron lines (step 15).
+- **Desktop clock** — `add-clock.py` puts a digital clock on the
+  desktop containment (step 16).
+- `sakura-system.sh` also installs the MadOS mark as the distro logo
+  (os-release LOGO + hicolor icons) for About This System.
