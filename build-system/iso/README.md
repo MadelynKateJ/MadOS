@@ -59,3 +59,21 @@ runs `apply-sakura.sh` once at each new user's first login (marker:
 first-login mechanism (its stage 8b), so a converted Mint and a fresh
 ISO install converge on the identical desktop. Run stage-sakura.sh
 after customization, before generating the ISO.
+
+## System pieces in the image
+
+`stage-system.sh <Cubic project>` (run after stage-sakura.sh, with
+sudo) bakes the system-level half in: the mados SDDM theme and its
+config, the virtual-keyboard off switch, the GRUB theme plus its
+defaults (Breeze grub.d drop-ins repointed, so the installer's own
+update-grub produces a themed boot config), the distro logo, and an
+enabled `mados-firstboot.service`. Two pieces cannot be baked
+because they need the username the installer creates — the manual
+login's HideUsers and the AccountsService avatar — so on an
+installed machine's first boot, before the display manager, the
+unit runs `branding/sakura/firstboot/mados-firstboot.sh`, which runs
+the in-image `sakura-system.sh` once for that user and disables
+itself (marker: `/var/lib/mados-firstboot-done`, log:
+`/var/log/mados-firstboot.log`). The GRUB theme definition lives in
+`branding/sakura/grub-theme.txt`, shared by sakura-system.sh and
+stage-system.sh so the two routes cannot drift apart.

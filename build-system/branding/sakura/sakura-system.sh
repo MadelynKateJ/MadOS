@@ -59,33 +59,7 @@ echo "SDDM virtual keyboard disabled."
 # --- GRUB: dusk blossoms behind a pink menu -----------------------------------
 mkdir -p /boot/grub/themes/mados
 cp "$HERE/mados-sakura-dusk.jpg" /boot/grub/themes/mados/background.jpg
-cat > /boot/grub/themes/mados/theme.txt <<'EOF'
-title-text: ""
-desktop-image: "background.jpg"
-desktop-image-scale-method: "crop"
-
-+ boot_menu {
-    left = 32%
-    width = 36%
-    top = 36%
-    height = 34%
-    item_font = "DejaVu Sans Bold 18"
-    item_color = "#f9a8d4"
-    item_height = 36
-    item_spacing = 6
-    selected_item_font = "DejaVu Sans Bold 18"
-    selected_item_color = "#ffffff"
-}
-
-+ label {
-    top = 84%
-    width = 100%
-    align = "center"
-    font = "DejaVu Sans 14"
-    color = "#fbcfe8"
-    text = "MadOS - Surprisingly Functional"
-}
-EOF
+cp "$HERE/grub-theme.txt" /boot/grub/themes/mados/theme.txt
 if grep -q '^GRUB_THEME=' /etc/default/grub; then
   sed -i 's|^GRUB_THEME=.*|GRUB_THEME=/boot/grub/themes/mados/theme.txt|' \
     /etc/default/grub

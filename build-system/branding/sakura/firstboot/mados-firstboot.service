@@ -1,0 +1,13 @@
+[Unit]
+Description=MadOS first-boot setup (username-dependent system theme pieces)
+After=local-fs.target
+Before=sddm.service display-manager.service
+ConditionPathExists=!/var/lib/mados-firstboot-done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/mados/sakura/firstboot/mados-firstboot.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
