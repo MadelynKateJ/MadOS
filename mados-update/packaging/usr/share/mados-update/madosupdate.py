@@ -410,8 +410,12 @@ class MadOSUpdate(Gtk.Window):
 
             self.set_busy(False)
 
+            reason = GLib.markup_escape_text(
+                self.installer.last_summary()
+            )
+
             self.status.set_markup(
-                "<b>✖ Installation failed or was cancelled.</b>"
+                "<b>✖ Installation failed:</b> " + reason
             )
 
             return False
