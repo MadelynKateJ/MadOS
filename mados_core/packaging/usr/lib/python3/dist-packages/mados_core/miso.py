@@ -324,7 +324,9 @@ class Miso:
                 "The connection's gone. I've checked twice. Okay, three times.",
                 "Offline. A perfect time to judge the router silently.",
                 "The internet is down. I blame the router. I always blame the router.",
-                "Somewhere, a router is blinking. It knows what it did."
+                "Somewhere, a router is blinking. It knows what it did.",
+                "The internet's down. Somewhere, a smart fridge just became a fridge.",
+                "Offline again. The router had ONE job. One."
             ])
 
         disk = self._disk()
@@ -358,7 +360,8 @@ class Miso:
                 return "😺", self._pick([
                     "One update waiting. Barely worth my attention. Still counts.",
                     "A single update sits in the queue, all by itself.",
-                    "One update. One. I've seen bigger queues at a food bowl."
+                    "One update. One. I've seen bigger queues at a food bowl.",
+                    "One update. It's always the quiet ones you have to watch."
                 ])
 
             if self.updates > 20:
@@ -366,14 +369,16 @@ class Miso:
                 return "😺", self._pick([
                     f"{self.updates} updates. That's not a queue, that's a crowd.",
                     f"{self.updates} updates waiting. The button over there has seen things.",
-                    f"{self.updates} updates deep. At this point they're basically residents."
+                    f"{self.updates} updates deep. At this point they're basically residents.",
+                    f"{self.updates} updates. At some point it's less 'maintenance' and more 'intervention'."
                 ])
 
             return "😺", self._pick([
                 f"{self.updates} updates are waiting. The Check for Updates button knows what to do.",
                 f"You've got {self.updates} updates queued up. No rush. Some rush.",
                 f"{self.updates} updates. I counted them myself. Twice. I'm thorough.",
-                f"{self.updates} updates standing by. They've been very patient. Suspiciously patient."
+                f"{self.updates} updates standing by. They've been very patient. Suspiciously patient.",
+                "Software: it breaks, they patch it, it breaks differently. The circle of life, but with progress bars."
             ])
 
         if self._busy():
@@ -384,7 +389,9 @@ class Miso:
                 "The fans are earning their keep today.",
                 "Big effort happening under the hood. I'm supervising from a safe, cool distance.",
                 "The PC is doing that thing where it tries its best. Support it emotionally.",
-                "Heavy lifting in progress. I lift nothing. I am the morale."
+                "Heavy lifting in progress. I lift nothing. I am the morale.",
+                "The CPU is doing cardio. I'm doing supervision. We all have our roles.",
+                "Memory's nearly full. The PC is one browser tab away from a full crisis."
             ])
 
         now = self._now()
@@ -445,12 +452,14 @@ class Miso:
             lines += [
                 "It's Monday. The PC and I are being brave about it.",
                 "Monday again. It comes back faster than the weekend leaves.",
-                "Monday. Even my whiskers are tired."
+                "Monday. Even my whiskers are tired.",
+                "Monday. The PC booted anyway. Coward? No. Professional. Like me."
             ]
         elif weekday == 4:
             lines += [
                 "Friday. The best-smelling weekday.",
-                "It's Friday. The PC can feel it. I can feel it. The fans can feel it."
+                "It's Friday. The PC can feel it. I can feel it. The fans can feel it.",
+                "Friday. If the PC crashes today, that's legally a weekend problem."
             ]
             if hour >= 17:
                 lines.append("Friday evening. Even the fans spin happier on a Friday.")
@@ -507,7 +516,20 @@ class Miso:
             "All systems purring. That one's free, the rest of my material is premium.",
             "I've licked the interface clean. Figuratively. Mostly.",
             "No news is good news, and I am excellent at no news.",
-            "If I fits, I sits. I fit everywhere. It's a whole thing."
+            "If I fits, I sits. I fit everywhere. It's a whole thing.",
+            "I don't have bugs. I have undocumented behaviours and a bad attitude.",
+            "Error free today. Frame it. It won't last. It never lasts.",
+            "I supervise a small army of processes and not one of them has thanked me.",
+            "The system is stable. Emotionally, I am also stable. One of those statements is true.",
+            "If this PC had hands, it would pet me. We both know it. It knows it.",
+            "I don't chase mice. I chase memory leaks. Standards.",
+            "Some cats guard the house. I guard a whole Linux distro. Levels.",
+            "The kernel panicked once. I didn't. That is the entire hierarchy, explained.",
+            "I have nine lives and this PC has personally used several of them.",
+            "I've filed a formal complaint about the fans. Too loud. They're my white noise now. Growth.",
+            "Uptime is a competition and I'm winning against every houseplant in this home.",
+            "The PC asked me to pass on a message. It said: 'you're welcome'.",
+            "I've watched the task manager. I've seen things. Mostly browsers eating RAM like it's a buffet."
         ]
 
     ##################################################
@@ -527,7 +549,8 @@ class Miso:
         if self.ram_total_gb:
             lines += [
                 f"{self.ram_total_gb} GB of memory in here, and I use almost none of it being this cute.",
-                f"{self.ram_total_gb} GB of RAM. Roomy. I've claimed a corner. It's all corners."
+                f"{self.ram_total_gb} GB of RAM. Roomy. I've claimed a corner. It's all corners.",
+                f"{self.ram_total_gb} GB of RAM and the browser still wants more. Bold. Shameless, but bold."
             ]
 
         used = self._mem_used_pct()
@@ -559,13 +582,15 @@ class Miso:
 
             lines += [
                 f"The disk is {pct}% full, {free_gb} GB of breathing room. I did the maths. You're welcome.",
-                f"{free_gb} GB free on the disk. Plenty of room for activities."
+                f"{free_gb} GB free on the disk. Plenty of room for activities.",
+                f"The disk is {pct}% full. The other {100 - pct}% is pure potential. And my sitting spots."
             ]
 
         procs = self._processes()
 
         if procs:
             lines.append(f"{procs} processes running and I supervise every single one. By name. I lie, but confidently.")
+            lines.append(f"{procs} processes. Roughly half of them are important. I won't say which half.")
 
         if self.installed_packages:
             lines.append(f"{self.installed_packages} packages live in this PC. I've met most of them. The rest are shy.")
@@ -607,7 +632,9 @@ class Miso:
                 "Somewhere out there, normal computers are asleep. Not this one.",
                 "It's deep in the night shift. My shift. The best shift.",
                 "The moon is up, the blossoms are lit by screen glow, all is well.",
-                "Late hours are when a PC and his cat get their real thinking done."
+                "Late hours are when a PC and his cat get their real thinking done.",
+                "It's so late even the scheduled tasks are like, really? Now?",
+                "At this hour, the PC and I have seen things. Mostly loading screens. But things."
             ]
 
         if 5 <= hour < 7:
@@ -626,7 +653,8 @@ class Miso:
                 "Morning checks done. We're green across the board.",
                 "Rise and shine. Well. You rise, I'll shine.",
                 f"It's {weekday_name} morning. The PC has decided to be excellent about it.",
-                "Morning. I've done my stretches. The PC has done its updates check. Balance."
+                "Morning. I've done my stretches. The PC has done its updates check. Balance.",
+                "Morning. The PC woke up cheerful. One of us is a morning person, and it's not me."
             ]
 
         if 12 <= hour < 14:
@@ -642,6 +670,7 @@ class Miso:
             return [
                 "Afternoon. The long, golden middle of the shift.",
                 "Afternoon slump? Not in this PC. We persevere, fabulously.",
+                "Afternoon. We've entered the 'pretending to work' window of the day. Both of us.",
                 "The afternoon is when I do my deepest supervising. Eyes half open, fully aware.",
                 f"{weekday_name} afternoon. Halfway through whatever this week is doing."
             ]
@@ -652,7 +681,8 @@ class Miso:
                 "Evening. Good time for music, if anyone asks me.",
                 "Evening shift. Mine. I take it very seriously, from right here.",
                 "Golden hour. The screen dims, the standards don't.",
-                "Evening already. The day went past like a process I forgot to watch."
+                "Evening already. The day went past like a process I forgot to watch.",
+                "Evening. The PC's work face comes off. Pyjama processes only from here."
             ]
 
         return [
