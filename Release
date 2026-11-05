@@ -1,24 +1,24 @@
 Architectures: amd64 all
 Codename: mados
 Components: main
-Date: Thu, 05 Nov 2026 02:50:47 +0000
+Date: Thu, 05 Nov 2026 02:59:13 +0000
 Description: MadOS package channel
 Label: MadOS
 Origin: MadOS
 Suite: stable
 MD5Sum:
- f1707321ec6e96c04e1704c9f011ff4a             2650 Packages
- e176d24bdc6c6e6c02c5d60c784fc971             1150 Packages.gz
- 040841c8829e2c6929b7bd8f1bfccc7f              172 Release
+ a4ed44b48d0ac6aaa8affadfd702544a             2650 Packages
+ 05adb0aeb83035180bf3de584679cabf             1148 Packages.gz
+ 728db04c4211821504bd34f41125edaa              172 Release
 SHA1:
- e0f9e32d9cc0c20448b7b17619a3b198f2cb1863             2650 Packages
- 3065c8194446907bb7d12082ca0abfa01e8287b0             1150 Packages.gz
- e802ea02a90c14e47145dd5f75e8ea1be388eeb2              172 Release
+ 040696fa4ab18812f859ec4377a775230761188b             2650 Packages
+ b6ef97fe4e732ad0e07864daf13a8e70e5882dd1             1148 Packages.gz
+ cd72cfd5047cd5c4d2d8327f9869daf644083f72              172 Release
 SHA256:
- 87ef3e1b0f8c3d2e57a2a262a824e3f8c4448adaf76af3f45af5bcf3e8336610             2650 Packages
- 801817f516a868e67551e8cba896fd359823d0b77c13edc32494923d6bde7ad8             1150 Packages.gz
- 04bfaf46c0c5c254680f32b111195cb486b21b4e8add71d9ef67a83c16766343              172 Release
+ 1de99d43068fd36d1f2712345c41b0227e26ff2a7c24f8bafea0f0ec81fe150a             2650 Packages
+ d85c6509975afebe4fd5463bbf598273319d6f5af7364ba5423c682f6c4aa3a8             1148 Packages.gz
+ 87e509f717ddbe39f03705d16e7cee30454501142911a7ebf753d29f6695a0ff              172 Release
 SHA512:
- 8cb1378240f5de8ca133e119e187a4d6854e7b063d2ed8d633ccd0f7d9c01748edfffa7b2864a322dd124ecf2941c34fdf2eca40d097bf7625862f4593c09e07             2650 Packages
- b9f60e072200385295afbd7e18d67fd02c92fa30c72ab42a9090f71b117f192e6bea7689ccc3db72020c3899de207c94a4c76172c142e3fa67ce256dcb46a73d             1150 Packages.gz
- 679d634429aecf2a17e233c2891b7969da656e8e55cd4487eb7b7c183d063da3c0f9d571a85e85a5d4352b3f0055dbccd1d667eb214fff5ef26b55b775faa26f              172 Release
+ ea6301df8f9b4af6e93166601a4e77c7526933c9299504bb82a147f860786d1386676f645b88c01aa939a06fb1c0b432870d42b05b44830320ff3f9776d2b31c             2650 Packages
+ ebd628f93db42f5e7a38378b990d5a67cfa0a4aea4f15465a0eec5451f666d361614d02865d85883e5bf82064023a0b9ad6801205da9868b87f56340df9ae92a             1148 Packages.gz
+ a24610d3ea2487a97f141048f070b15779dbd1f398e3646bdd58ca0f0cd0a4cdf25c717d072cb6045323d33bc8f3356e0454a3a8413ad12d01aa4ef518f2734c              172 Release
