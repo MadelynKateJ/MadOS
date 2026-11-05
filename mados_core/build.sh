@@ -25,6 +25,7 @@ echo "[4/5] Building package..."
 # no matter what umask the build shell runs with.
 find "$PROJECT_DIR/packaging" -type d -exec chmod 755 {} +
 find "$PROJECT_DIR/packaging" -type f -exec chmod 644 {} +
+find "$PROJECT_DIR/packaging/usr/bin" -type f -exec chmod 755 {} + 2>/dev/null || true
 dpkg-deb --build \
 "$PROJECT_DIR/packaging" \
 "$PROJECT_DIR/mados-core.deb"

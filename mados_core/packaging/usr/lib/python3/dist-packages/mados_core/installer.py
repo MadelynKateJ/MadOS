@@ -86,7 +86,10 @@ class Installer:
         ]
 
         if errors:
-            return errors[-1][2:].strip()
+            return (
+                errors[-1][2:].strip()
+                + " (recovery: run mados-fix-update in a terminal)"
+            )
 
         lines = [
             line.strip()
@@ -98,6 +101,27 @@ class Installer:
             return lines[-1]
 
         return "no details were reported"
+
+    ##################################################
+
+    def _run_with_retry(self, command):
+        """Run an install command; on failure, retry once with
+        --fix-broken added. The rule for MadOS Update is that
+        any version updates to the newest without the user
+        seeing an error: a plan that apt refuses (pinning
+        disputes, half-finished states from an interrupted
+        run) gets one self-healing attempt before the failure
+        is reported."""
+
+        if self._run(command):
+            return True
+
+        healed = list(command)
+
+        if "--fix-broken" not in healed:
+            healed.insert(healed.index("apt-get") + 2, "--fix-broken")
+
+        return self._run(healed)
 
     ##################################################
 
@@ -119,7 +143,7 @@ class Installer:
 
         command.extend(packages)
 
-        return self._run(command)
+        return self._run_with_retry(command)
 
     ##################################################
 
@@ -135,7 +159,7 @@ class Installer:
 
         command.extend(DPKG_OPTIONS)
 
-        return self._run(command)
+        return self._run_with_retry(command)
 
     ##################################################
 

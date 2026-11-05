@@ -1,0 +1,35 @@
+#!/bin/bash
+# mados-fix-update: the parachute for MadOS Update.
+#
+# Downloads the current MadOS packages from the update channel
+# and installs them directly with dpkg, bypassing apt upgrade
+# plans entirely. An apt plan can refuse a whole run over
+# pinning/downgrade disputes the GUI cannot answer; dpkg does
+# not make plans, it just installs what it is handed, in the
+# order given. If MadOS Update itself ever fails to update,
+# run this in a terminal:
+#
+#   mados-fix-update
+#
+# It asks for your password once (via pkexec) and leaves the
+# machine with a current, working updater.
+set -e
+
+TMP="$(mktemp -d)"
+cd "$TMP"
+
+echo "Fetching the current MadOS packages..."
+apt-get download mados-core mados-ui mados-settings \
+    mados-update mados-welcome mados-desktop
+
+echo "Installing them directly..."
+pkexec dpkg -i "$TMP"/mados-core_*.deb \
+               "$TMP"/mados-ui_*.deb \
+               "$TMP"/mados-settings_*.deb \
+               "$TMP"/mados-update_*.deb \
+               "$TMP"/mados-welcome_*.deb \
+               "$TMP"/mados-desktop_*.deb \
+    || pkexec apt-get install -f -y
+
+rm -rf "$TMP"
+echo "Done. MadOS Update can take it from here."
