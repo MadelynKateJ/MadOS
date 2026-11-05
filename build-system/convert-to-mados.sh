@@ -77,8 +77,17 @@ if [ "$ok" = "1" ]; then
   dpkg -i "$DEBS"/*.deb || apt-get install -f -y
 else
   echo "WARNING: could not download the MadOS packages; skipping stage 2."
-  echo "Install them later from the GitHub release (v0.1.0-alpha)."
+  echo "Install them later from the GitHub release (v0.1.1-alpha)."
 fi
+
+# --- Stage 2b: enrol in the MadOS update channel -------------------------------
+# From here on, MadOS package updates arrive through MadOS Update
+# (apt) like any other system update.
+say "stage 2b: MadOS update channel"
+echo "deb [trusted=yes] https://madelynkatej.github.io/MadOS/ ./" \
+  > /etc/apt/sources.list.d/mados.list
+apt-get update -o Dir::Etc::sourcelist="sources.list.d/mados.list" \
+  -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0" || true
 
 # --- Stage 3: SDDM + Plasma session, Cinnamon out ------------------------------
 say "stage 3/8: display manager and session"

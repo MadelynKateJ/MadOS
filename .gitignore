@@ -37,3 +37,4 @@ mados-ui/Pinguy-Builder/
 *.iso
 *.squashfs
 *.img
+apt-repo/
