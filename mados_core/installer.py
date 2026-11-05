@@ -7,6 +7,17 @@ import subprocess
 # default action where one exists, confold keeps the user's
 # existing file (MadOS branding edits like /etc/issue must
 # survive updates, not be overwritten or block them).
+# --allow-downgrades (both install paths): MadOS is built on
+# KDE neon, whose repository pins its own builds of some
+# packages above the Ubuntu/Mint versions. A dist-upgrade
+# therefore legitimately proposes "downgrading" a handful of
+# packages to the neon builds, and apt refuses the whole run
+# when -y is given without --allow-downgrades ("Packages were
+# downgraded and -y was used without --allow-downgrades").
+# That refusal silently failed every Install All until
+# 2026-11-04, when running the app from a terminal finally
+# surfaced the message. neon's own upgrade path allows
+# downgrades for the same reason.
 DPKG_OPTIONS = [
     "-o",
     "Dpkg::Options::=--force-confdef",
@@ -100,6 +111,7 @@ class Installer:
             "apt-get",
             "install",
             "--only-upgrade",
+            "--allow-downgrades",
             "-y"
         ]
 
@@ -117,6 +129,7 @@ class Installer:
             "pkexec",
             "apt-get",
             "dist-upgrade",
+            "--allow-downgrades",
             "-y"
         ]
 
