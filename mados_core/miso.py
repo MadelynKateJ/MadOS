@@ -507,6 +507,7 @@ class Miso:
             "The bin is empty. I checked. I check everything. It's a burden.",
             "If the PC slows down, I slow down. Solidarity.",
             "Technically I'm software. Emotionally I'm the manager.",
+            "This machine updates itself now. I supervise. It's a management role.",
             "I run a tight ship. The ship is a PC. The crew is also me.",
             "Everything is where I left it, because I never leave.",
             "You can tell it's a good day when I have almost nothing sarcastic to report. Almost.",
