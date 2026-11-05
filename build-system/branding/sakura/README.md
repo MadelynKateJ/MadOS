@@ -61,6 +61,9 @@ session any time with `apply-sakura.sh`.
   username-and-password prompt, the last user is never prefilled,
   and installer-set autologin is removed so the prompt actually
   appears (a privacy choice from the first machine, Nov 4, 2026).
+  The script also disables the greeter's virtual keyboard: neon
+  ships it switched on, and an empty `InputMethod` override turns
+  it off for good on machines with a real keyboard.
 
 ## The buttons
 

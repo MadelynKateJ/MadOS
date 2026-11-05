@@ -47,6 +47,15 @@ if [ -n "$U2" ] && id "$U2" >/dev/null 2>&1; then
   echo "SDDM manual login set for $U2 (no user list, no autologin)."
 fi
 
+# --- No virtual keyboard -----------------------------------------------------
+# KDE neon ships /usr/lib/sddm/sddm.conf.d/00neon-virtualkbd.conf with
+# InputMethod=qtvirtualkeyboard, so the greeter pops an on-screen
+# keyboard even on machines with a real keyboard. An empty InputMethod
+# in /etc/sddm.conf.d outranks the packaged default and loads none.
+printf '[General]\nInputMethod=\n' \
+  > /etc/sddm.conf.d/30-novirtualkeyboard.conf
+echo "SDDM virtual keyboard disabled."
+
 # --- GRUB: dusk blossoms behind a pink menu -----------------------------------
 mkdir -p /boot/grub/themes/mados
 cp "$HERE/mados-sakura-dusk.jpg" /boot/grub/themes/mados/background.jpg
