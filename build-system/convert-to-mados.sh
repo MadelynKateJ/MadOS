@@ -15,6 +15,9 @@
 #   6. Hostname: MadOS
 #   7. Neofetch cat for your user           (branding/neofetch/)
 #   8. MadOS Sakura, the default look       (branding/sakura/)
+#      ...including the system pieces (branding/sakura/sakura-system.sh):
+#      SDDM login theme, GRUB boot theme, system avatar + distro logo,
+#      manual login (no user list, no autologin), no virtual keyboard.
 #
 # Expect a long run (the neon upgrade is hundreds of packages) and one
 # reboot at the end. Log: /var/log/mados-convert.log
@@ -314,6 +317,17 @@ DEOF
     "$UHOME/.config/autostart/mados-sakura.desktop"
 fi
 
+# --- Stage 8c: Sakura system pieces (SDDM theme, GRUB, avatar, logo) ---------
+# Everything in sakura-system.sh needs root and has no live-session
+# dependency, so it runs right here rather than at first login: the
+# mados SDDM theme, the GRUB theme, the system avatar, the distro
+# logo, the manual login (user hidden from the greeter, autologin
+# stripped) and the virtual-keyboard off switch. Pass the target
+# user through explicitly: the script keys its per-user pieces off
+# SUDO_USER, and nested sudo/root shells do not always keep it set.
+say "stage 8c/8: Sakura system pieces"
+SUDO_USER="$TARGET_USER" bash "$BS/branding/sakura/sakura-system.sh"
+
 say "DONE"
 echo "This system is now MadOS 0.1.0-alpha. Reboot to see it:"
 echo "  sudo reboot"
@@ -322,3 +336,5 @@ echo "is finished). Everything else Mint-branded is gone."
 echo "The default look is MadOS Sakura: blossom wallpaper, blush colors,"
 echo "flower window buttons (bud, half-open, full bloom), and the rest of"
 echo "the theme finishes itself at your first login."
+echo "The boot menu and login screen are already MadOS too. The login"
+echo "is manual by design: no user list, type your username + password."

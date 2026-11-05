@@ -288,3 +288,9 @@ mkdir -p "$HOME/.local/share/org.kde.syntax-highlighting/themes"
 cp "$HERE/kate/MadOS-Sakura.theme" "$HOME/.local/share/org.kde.syntax-highlighting/themes/"
 kwriteconfig6 --file katepartrc --group "KTextEditor Renderer" \
   --key "Color Theme" "MadOS Sakura" || true
+
+# 23. No virtual keyboard in-session either: this setup assumes a real
+#     keyboard, so KWin never enables one (desktop or lock screen).
+#     The greeter half is system-side (see sakura-system.sh).
+kwriteconfig6 --file kwinrc --group Wayland \
+  --key VirtualKeyboardEnabled false || true
