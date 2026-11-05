@@ -264,8 +264,13 @@ for BASE in "$HOME/.config/mozilla/firefox" "$HOME/.mozilla/firefox" \
 done
 
 # 18. Jelly windows, magic-lamp minimize, dreamier blur.
+#     blurEnabled must be written explicitly: it was missing
+#     until 2026-11-04, when the first converter-built machine
+#     (Mint config lineage, no neon defaults) ended up with the
+#     blur strength set but the effect itself never enabled.
 kwriteconfig6 --file kwinrc --group Plugins --key wobblywindowsEnabled true
 kwriteconfig6 --file kwinrc --group Plugins --key magiclampEnabled true
+kwriteconfig6 --file kwinrc --group Plugins --key blurEnabled true
 kwriteconfig6 --file kwinrc --group Effect-Blur --key BlurStrength 13
 qdbus6 org.kde.KWin /KWin reconfigure || true
 
