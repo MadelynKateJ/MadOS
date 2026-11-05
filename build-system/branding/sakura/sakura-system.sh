@@ -67,6 +67,17 @@ if grep -q '^GRUB_THEME=' /etc/default/grub; then
 else
   echo 'GRUB_THEME=/boot/grub/themes/mados/theme.txt' >> /etc/default/grub
 fi
+# Watch out: grub.d drop-ins are sourced AFTER /etc/default/grub, so a
+# stock Breeze drop-in (99_breeze-grub.cfg, shipped with KDE neon) gets
+# the last word and silently restores the Breeze theme. Repoint any
+# drop-in that still names the Breeze theme at the MadOS one.
+for f in /etc/default/grub.d/*.cfg; do
+  [ -f "$f" ] || continue
+  if grep -q '/boot/grub/themes/breeze/theme.txt' "$f"; then
+    sed -i 's|/boot/grub/themes/breeze/theme.txt|/boot/grub/themes/mados/theme.txt|g' "$f"
+    echo "Repointed $f at the mados GRUB theme."
+  fi
+done
 update-grub || grub-mkconfig -o /boot/grub/grub.cfg
 echo "GRUB theme set to mados."
 

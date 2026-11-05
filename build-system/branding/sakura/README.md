@@ -52,7 +52,10 @@ session any time with `apply-sakura.sh`.
   SDDM theme and a GRUB theme from `mados-sakura-dusk.jpg` (the same
   blossoms at night, so white login text stays readable) and sets the
   system avatar. Run it once with sudo; the user-level pieces never
-  need root.
+  need root. It also repoints the stock Breeze GRUB drop-in in
+  `/etc/default/grub.d/` — those drop-ins are read after the main
+  config, so without that step the Breeze boot theme quietly wins
+  (found the hard way on the first MadOS machine, Nov 4, 2026).
 
 ## The buttons
 
