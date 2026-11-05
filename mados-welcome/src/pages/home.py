@@ -1,11 +1,13 @@
 import gi
 gi.require_version("Gtk", "3.0")
 
-from gi.repository import Gtk
+from gi.repository import Gtk, GLib
 
 import launcher
 import systeminfo
 from madosui import MadCard, MadButton, MadStatusRow, MadSection
+
+from mados_core.miso import Miso
 
 
 class HomePage(Gtk.Box):
@@ -166,21 +168,24 @@ class HomePage(Gtk.Box):
 
         miso = MadCard("🐈 Miso")
 
-        message = Gtk.Label()
+        self.miso = Miso()
+        self.miso_ticks = 0
+        self.miso_emoji = "🐈"
+        self.miso_thinking = False
 
-        message.set_markup(
-            "<span size='16000'>🐈</span>\n\n"
-            "<b>Hello, Maddie!</b>\n\n"
-            "Everything looks good today.\n\n"
-            "Have fun using MadOS!"
-        )
+        self.miso_message = Gtk.Label()
+        self.miso_message.set_line_wrap(True)
+
+        self.update_miso()
 
         miso.content.pack_start(
-            message,
+            self.miso_message,
             False,
             False,
             0
         )
+
+        GLib.timeout_add_seconds(25, self.miso_tick)
 
         right.pack_start(
             miso,
@@ -188,6 +193,70 @@ class HomePage(Gtk.Box):
             True,
             0
         )
+
+    ###################################################
+
+    def update_miso(self):
+
+        emoji, line = self.miso.mood()
+
+        self.miso_emoji = emoji
+
+        self.miso_message.set_markup(
+            f"<span size='16000'>{emoji}</span>\n\n"
+            f"{line}"
+        )
+
+    def miso_tick(self):
+
+        # Time for a new line: think first (. .. ...)
+        # for a moment, then say it
+        if self.miso_thinking:
+            return True
+
+        self.miso_thinking = True
+        self.miso_dots = 0
+
+        self.miso_show_dots()
+
+        GLib.timeout_add(600, self.miso_dot_step)
+
+        return True
+
+    def miso_show_dots(self):
+
+        count = (self.miso_dots % 3) + 1
+
+        dots = " ".join(["."] * count)
+
+        self.miso_message.set_markup(
+            f"<span size='16000'>{self.miso_emoji}</span>\n\n"
+            f"<span size='16000'><b>{dots}</b></span>"
+        )
+
+    def miso_dot_step(self):
+
+        self.miso_dots += 1
+
+        if self.miso_dots > 5:
+
+            self.miso_thinking = False
+
+            self.miso_ticks += 1
+
+            # The slow facts (updates waiting, internet)
+            # refresh every few cycles; the rest of what
+            # Miso watches is read live each time he talks
+            if self.miso_ticks % 8 == 0:
+                self.miso.refresh_facts()
+
+            self.update_miso()
+
+            return False
+
+        self.miso_show_dots()
+
+        return True
 
     ###################################################
 
