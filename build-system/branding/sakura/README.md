@@ -56,6 +56,11 @@ session any time with `apply-sakura.sh`.
   `/etc/default/grub.d/` — those drop-ins are read after the main
   config, so without that step the Breeze boot theme quietly wins
   (found the hard way on the first MadOS machine, Nov 4, 2026).
+  The same script also makes the login **manual**: the user is
+  hidden from the greeter's list, which flips this theme into its
+  username-and-password prompt, the last user is never prefilled,
+  and installer-set autologin is removed so the prompt actually
+  appears (a privacy choice from the first machine, Nov 4, 2026).
 
 ## The buttons
 

@@ -31,6 +31,22 @@ if [ -d /usr/share/sddm/themes/breeze ]; then
   echo "SDDM theme set to mados."
 fi
 
+# --- Manual login: no user list, no autologin ------------------------------
+# The Breeze-based theme falls back to its "Type in Username and
+# Password" form when the user model is empty (showUserList is false
+# when the model count is 0 or not all users are contained). So: hide
+# the installing user from the greeter, never prefill the last user,
+# and strip any installer-set autologin, or no login screen appears.
+U2="${SUDO_USER:-}"
+if [ -n "$U2" ] && id "$U2" >/dev/null 2>&1; then
+  if [ -f /etc/sddm.conf ]; then
+    sed -i "/^User=${U2}\$/d; /^Session=plasma\$/d" /etc/sddm.conf
+  fi
+  printf '[Users]\nHideUsers=%s\nRememberLastUser=false\n' "$U2" \
+    > /etc/sddm.conf.d/20-manuallogin.conf
+  echo "SDDM manual login set for $U2 (no user list, no autologin)."
+fi
+
 # --- GRUB: dusk blossoms behind a pink menu -----------------------------------
 mkdir -p /boot/grub/themes/mados
 cp "$HERE/mados-sakura-dusk.jpg" /boot/grub/themes/mados/background.jpg
