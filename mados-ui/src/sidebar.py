@@ -44,6 +44,10 @@ class MadSidebar(Gtk.Box):
 
         button = Gtk.Button()
 
+        button.get_style_context().add_class(
+            "mad-sidebar-button"
+        )
+
         row = Gtk.Box(
             orientation=Gtk.Orientation.HORIZONTAL,
             spacing=12

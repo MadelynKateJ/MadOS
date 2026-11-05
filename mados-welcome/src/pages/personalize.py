@@ -2,6 +2,8 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
+import launcher
+
 
 class PersonalizePage(Gtk.Box):
 
@@ -34,4 +36,8 @@ class PersonalizePage(Gtk.Box):
         self.pack_start(description, False, False, 0)
 
         button = Gtk.Button(label="Open Appearance Settings")
+        button.connect(
+            "clicked",
+            lambda b: launcher.open_settings()
+        )
         self.pack_start(button, False, False, 10)

@@ -25,6 +25,10 @@ class AccentCard(Gtk.Button):
         self.emoji = emoji
         self.name = name
 
+        self.get_style_context().add_class(
+            "accent-card"
+        )
+
         box = Gtk.Box(
             orientation=Gtk.Orientation.VERTICAL,
             spacing=8
@@ -57,10 +61,14 @@ class AccentCard(Gtk.Button):
 
     def set_selected(self, selected):
 
+        context = self.get_style_context()
+
         if selected:
             self.check.set_markup("<b>✓ Selected</b>")
+            context.add_class("accent-card-selected")
         else:
             self.check.set_text("")
+            context.remove_class("accent-card-selected")
 
 
 class MadAccentSelector(Gtk.Box):
@@ -111,6 +119,12 @@ class MadAccentSelector(Gtk.Box):
 
         self.settings.set_accent(colour)
 
+        # Re-apply the stylesheet right away so the running
+        # app changes colour immediately, not at next launch.
+        from mados_ui.style import MadStyleManager
+
+        MadStyleManager.load()
+
         self.refresh()
 
     def refresh(self):
@@ -121,7 +135,10 @@ class MadAccentSelector(Gtk.Box):
 
             card.set_selected(colour == current)
 
-        card = self.cards[current]
+        card = self.cards.get(
+            current,
+            self.cards["pink"]
+        )
 
         if current == "pink":
 

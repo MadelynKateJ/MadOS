@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import subprocess
 
 import gi
@@ -7,13 +8,16 @@ gi.require_version("Gtk", "3.0")
 
 from gi.repository import Gtk
 
+from mados_core import Settings
+
 from mados_ui import (
     MadWindow,
     MadSection,
     MadCard,
-    MadButton,
-    MadAccentSelector
+    MadButton
 )
+
+from mados_ui.style import MadStyleManager
 
 
 class SettingsWindow(MadWindow):
@@ -23,13 +27,13 @@ class SettingsWindow(MadWindow):
         super().__init__("🌸 MadOS Settings")
 
         self.add_page("Appearance", self.appearance_page(), "🎨")
-        self.add_page("Displays", self.simple_page("Displays"), "🖥")
-        self.add_page("Sound", self.simple_page("Sound"), "🔊")
-        self.add_page("Network", self.simple_page("Network"), "🌐")
-        self.add_page("Keyboard", self.simple_page("Keyboard"), "⌨")
-        self.add_page("Mouse", self.simple_page("Mouse"), "🖱")
-        self.add_page("Users", self.simple_page("Users"), "👤")
-        self.add_page("Privacy", self.simple_page("Privacy"), "🔒")
+        self.add_page("Displays", self.module_page("Displays", "kcm_kscreen"), "🖥")
+        self.add_page("Sound", self.module_page("Sound", "kcm_pulseaudio"), "🔊")
+        self.add_page("Network", self.module_page("Network", "kcm_networkmanagement"), "🌐")
+        self.add_page("Keyboard", self.module_page("Keyboard", "kcm_keyboard"), "⌨")
+        self.add_page("Mouse", self.module_page("Mouse", "kcm_mouse"), "🖱")
+        self.add_page("Users", self.module_page("Users", "kcm_users"), "👤")
+        self.add_page("Privacy", self.module_page("Privacy", "kcm_feedback"), "🔒")
         self.add_page("Updates", self.updates_page(), "⬆")
         self.add_page("About", self.about_page(), "ℹ")
 
@@ -90,27 +94,147 @@ class SettingsWindow(MadWindow):
 
     ##################################################
 
-    def appearance_page(self):
+    def module_page(self, title, module):
 
-        page = self.page("Appearance")
+        # Until MadOS grows its own page for this, open the
+        # real Plasma settings module so the button does
+        # something true instead of promising "coming soon".
 
-        accent = MadCard("Accent Colour")
+        page = self.page(title)
 
-        accent.content.pack_start(
-            MadAccentSelector(),
+        card = MadCard(title)
+
+        label = Gtk.Label(
+            label="Managed in Plasma's settings for now."
+        )
+
+        label.set_xalign(0)
+
+        card.content.pack_start(
+            label,
+            False,
+            False,
+            0
+        )
+
+        button = MadButton("Open")
+
+        button.connect(
+            "clicked",
+            lambda b: subprocess.Popen(
+                ["kcmshell6", module]
+            )
+        )
+
+        card.content.pack_start(
+            button,
             False,
             False,
             0
         )
 
         page.pack_start(
-            accent,
+            card,
             False,
             False,
             0
         )
 
         return page
+
+    ##################################################
+
+    def appearance_page(self):
+
+        page = self.page("Appearance")
+
+        card = MadCard("Mode")
+
+        label = Gtk.Label(
+            label="Dark or light, for the MadOS apps."
+        )
+
+        label.set_xalign(0)
+
+        card.content.pack_start(
+            label,
+            False,
+            False,
+            0
+        )
+
+        row = Gtk.Box(
+            orientation=Gtk.Orientation.HORIZONTAL,
+            spacing=10
+        )
+
+        text = Gtk.Label(label="Dark Mode")
+
+        text.set_xalign(0)
+
+        row.pack_start(text, True, True, 0)
+
+        self.dark_switch = Gtk.Switch()
+
+        self.dark_switch.set_active(
+            Settings().get_dark_mode()
+        )
+
+        self.dark_switch.connect(
+            "notify::active",
+            self.dark_mode_toggled
+        )
+
+        row.pack_start(
+            self.dark_switch,
+            False,
+            False,
+            0
+        )
+
+        card.content.pack_start(
+            row,
+            False,
+            False,
+            0
+        )
+
+        page.pack_start(
+            card,
+            False,
+            False,
+            0
+        )
+
+        return page
+
+    ##################################################
+
+    def dark_mode_toggled(self, switch, param):
+
+        dark = switch.get_active()
+
+        Settings().set_dark_mode(dark)
+
+        MadStyleManager.load()
+
+        # The Sakura pair: dusk picture for dark mode,
+        # the pale one for light
+        image = (
+            "mados-sakura-dusk.jpg"
+            if dark
+            else "mados-sakura-wallpaper.jpg"
+        )
+
+        path = os.path.expanduser(
+            os.path.join("~", "Pictures", image)
+        )
+
+        if os.path.exists(path):
+
+            subprocess.Popen(
+                ["plasma-apply-wallpaperimage", path]
+            )
 
     ##################################################
 

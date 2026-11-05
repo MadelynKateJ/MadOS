@@ -30,6 +30,7 @@ def check_updates():
 
 def open_software():
     return _launch([
+        ["plasma-discover"],
         ["mados-store"],
         ["mintinstall"]
     ])

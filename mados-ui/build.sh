@@ -23,6 +23,10 @@ find "$TARGET" -name "*.pyc" -delete
 find "$TARGET" -name "__pycache__" -type d -exec rm -rf {} +
 
 echo "[3/5] Building package..."
+# Normalize modes: a package must install world-readable files
+# no matter what umask the build shell runs with.
+find "$PACKAGE" -type d -exec chmod 755 {} +
+find "$PACKAGE" -type f -exec chmod 644 {} +
 dpkg-deb --build "$PACKAGE" mados-ui.deb
 
 echo "[4/5] Installing..."

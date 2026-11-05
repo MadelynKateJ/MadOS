@@ -27,6 +27,11 @@ find "$PACKAGE_DIR" -name "*.py" -exec chmod 755 {} \;
 chmod 755 "$PROJECT_DIR/packaging/usr/bin/madoswelcome"
 
 echo "[4/7] Building package..."
+# Normalize modes: a package must install world-readable files
+# no matter what umask the build shell runs with.
+find "$PROJECT_DIR/packaging" -type d -exec chmod 755 {} +
+find "$PROJECT_DIR/packaging" -type f -exec chmod 644 {} +
+find "$PROJECT_DIR/packaging/usr/bin" -type f -exec chmod 755 {} + 2>/dev/null || true
 dpkg-deb --build \
     "$PROJECT_DIR/packaging" \
     "$PROJECT_DIR/mados-welcome.deb"

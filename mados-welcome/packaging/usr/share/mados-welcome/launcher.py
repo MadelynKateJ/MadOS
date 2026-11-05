@@ -1,68 +1,13 @@
-import shutil
-import subprocess
+# Welcome's launchers live in the shared core framework
+# (mados_core.launcher) so every MadOS app opens the same
+# programs the same way. This module only re-exports them
+# under the names the Welcome pages have always used.
 
-
-def _launch(programs):
-
-    for program in programs:
-
-        executable = program[0]
-
-        if shutil.which(executable):
-
-            try:
-                subprocess.Popen(program)
-                return True
-            except Exception as e:
-                print(e)
-
-    return False
-
-
-##################################################
-# Applications
-##################################################
-
-def check_updates():
-    return _launch([
-        ["mados-update"],
-        ["mintupdate"]
-    ])
-
-
-def open_software():
-    return _launch([
-        ["mados-software"],
-        ["mintinstall"]
-    ])
-
-
-def open_settings():
-    return _launch([
-        ["mados-settings"],
-        ["gnome-control-center"],
-        ["systemsettings"]
-    ])
-
-
-def open_terminal():
-    return _launch([
-        ["kgx"],
-        ["gnome-terminal"],
-        ["konsole"],
-        ["xterm"]
-    ])
-
-
-def open_files():
-    return _launch([
-        ["nemo"],
-        ["dolphin"],
-        ["nautilus"]
-    ])
-
-
-def open_browser(url):
-    return _launch([
-        ["xdg-open", url]
-    ])
+from mados_core.launcher import (
+    check_updates,
+    open_software,
+    open_settings,
+    open_terminal,
+    open_files,
+    open_browser
+)

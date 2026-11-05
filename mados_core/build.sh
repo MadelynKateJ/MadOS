@@ -21,6 +21,10 @@ cp *.py \
 "$PROJECT_DIR/packaging/usr/lib/python3/dist-packages/mados_core/"
 
 echo "[4/5] Building package..."
+# Normalize modes: a package must install world-readable files
+# no matter what umask the build shell runs with.
+find "$PROJECT_DIR/packaging" -type d -exec chmod 755 {} +
+find "$PROJECT_DIR/packaging" -type f -exec chmod 644 {} +
 dpkg-deb --build \
 "$PROJECT_DIR/packaging" \
 "$PROJECT_DIR/mados-core.deb"

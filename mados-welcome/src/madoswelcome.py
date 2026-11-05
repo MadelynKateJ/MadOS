@@ -41,6 +41,12 @@ class MadOSWelcome(Gtk.Window):
                 Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
             )
 
+        # Then the live MadOS accent on top, so Welcome
+        # follows the same accent as the other apps
+        from mados_ui.style import MadStyleManager
+
+        MadStyleManager.load()
+
         ##################################################
         # Window
         ##################################################
@@ -143,6 +149,10 @@ class MadOSWelcome(Gtk.Window):
 
             button = Gtk.Button(
                 label=title
+            )
+
+            button.get_style_context().add_class(
+                "mad-sidebar-button"
             )
 
             button.connect(
