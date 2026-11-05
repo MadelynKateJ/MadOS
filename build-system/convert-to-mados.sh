@@ -67,7 +67,7 @@ bash "$BS/kde68/kde68-cubic.sh"
 say "stage 2/8: MadOS components"
 DEBS=/tmp/mados-debs
 mkdir -p "$DEBS"
-REL=https://github.com/MadelynKateJ/MadOS/releases/download/v0.1.0-alpha
+REL=https://github.com/MadelynKateJ/MadOS/releases/download/v0.1.1-alpha
 ok=1
 for f in mados-core.deb mados-desktop.deb mados-settings.deb \
          mados-ui.deb mados-update.deb mados-welcome.deb; do
