@@ -314,11 +314,17 @@ if [ "$TARGET_USER" != "root" ] && id "$TARGET_USER" >/dev/null 2>&1; then
   cp -r "$BS/branding/sakura" "$UHOME/.local/share/mados/sakura"
   cp "$BS/branding/sakura/first-login.sh" "$UHOME/.local/share/mados/first-login.sh"
   chmod +x "$UHOME/.local/share/mados/first-login.sh"
-  cat > "$UHOME/.config/autostart/mados-sakura.desktop" <<'DEOF'
+  # The Exec path must be ABSOLUTE: autostart entries get no shell
+  # variable expansion, so a literal $HOME here never runs (found
+  # the hard way on the first full converter test, 2026-11-04: the
+  # entry sat there silently and the whole first-login half of
+  # Sakura never fired). The ISO route always used an absolute
+  # path, which is why only converted machines were affected.
+  cat > "$UHOME/.config/autostart/mados-sakura.desktop" <<DEOF
 [Desktop Entry]
 Type=Application
 Name=MadOS Sakura first-login setup
-Exec=bash $HOME/.local/share/mados/first-login.sh
+Exec=bash $UHOME/.local/share/mados/first-login.sh
 X-KDE-autostart-phase=2
 NoDisplay=true
 DEOF
