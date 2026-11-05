@@ -1,0 +1,99 @@
+Package: mados-core
+Version: 0.1.1
+Architecture: all
+Maintainer: Madelyn <madelyn@mados.dev>
+Depends: python3
+Filename: ./mados-core.deb
+Size: 10040
+MD5sum: 239175087404892b48ea3d367ecdead8
+SHA1: c6f2573f2cc010ba8e29f64db4c195e6c62edcce
+SHA256: 05062fc03e7678b61450d996459154f0c79f3c5d0e5a543c61389f651da28f4d
+Section: libs
+Priority: optional
+Description: MadOS Core Framework
+ Shared Python framework used by all MadOS applications.
+
+Package: mados-desktop
+Version: 0.1.1
+Architecture: all
+Maintainer: Madelyn <madelyn@madoslinux.org>
+Depends: plasma-desktop,
+ plasma-workspace,
+ sddm,
+ dolphin,
+ konsole,
+ kate,
+ discover,
+ network-manager,
+ network-manager-gnome,
+ pipewire,
+ pipewire-pulse,
+ wireplumber,
+ mados-core,
+ mados-ui,
+ mados-settings,
+ mados-update,
+ mados-welcome
+Filename: ./mados-desktop.deb
+Size: 662
+MD5sum: 90daf740df4ceb9262121d48618212f7
+SHA1: 61b1108aff69c0b0184a4e056aa7e92c07ef836c
+SHA256: ee4458246804395c61b4f7265f9bfb09ab3956da223194a26e7aaca12193d572
+Section: metapackages
+Priority: optional
+Description: MadOS Desktop Environment
+ Installs the complete MadOS desktop experience.
+
+Package: mados-settings
+Version: 0.1.1
+Architecture: all
+Maintainer: Madelyn
+Depends: python3, python3-gi
+Filename: ./mados-settings.deb
+Size: 5314
+MD5sum: 9487c4af3c58928b86bbe2a77a13d771
+SHA1: 8952d389a878c3bb82c7e132f28f9c47d4eadd81
+SHA256: 4fc3f51bfaa1df2eac0032a8e2945e19d748b99bbd91dad20ea1422d010277b5
+Description: MadOS Settings
+
+Package: mados-ui
+Version: 0.2.1
+Architecture: all
+Maintainer: Madelyn
+Depends: python3, python3-gi
+Filename: ./mados-ui.deb
+Size: 3908
+MD5sum: d53df8f6b68fe1d168e949d37d500994
+SHA1: 943cd9ce8584c43d343e54c6d231e1306fc16f6d
+SHA256: 589dea2968c387849cbf55f3ee5dec7a35766a061cf27b07ce378e731b5bf629
+Description: Shared UI framework for MadOS applications.
+
+Package: mados-update
+Version: 0.1.1
+Architecture: all
+Maintainer: Madelyn <madelyn@mados.dev>
+Depends: python3, python3-gi, python3-apt
+Filename: ./mados-update.deb
+Size: 3562
+MD5sum: 9c6281b977e670f7493c9be3ce79160b
+SHA1: 47e9e0bdc5853169eeeeb5df34b0731da2af0070
+SHA256: 2964244682a48e6809460bf6eb36d8fd18c2724b821e96cc39b3a44a818964b1
+Section: admin
+Priority: optional
+Description: MadOS Update Manager
+ Native update manager for MadOS.
+
+Package: mados-welcome
+Version: 0.1.1
+Architecture: all
+Maintainer: Madelyn <madelyn@mados.dev>
+Depends: python3, python3-gi
+Filename: ./mados-welcome.deb
+Size: 5364
+MD5sum: cfc7add430e7652a363905399ef11b82
+SHA1: 71ef1b48a83f9cb2bdc74993f56aee458bee397f
+SHA256: f6766d764c10b74c28d7cfd607346cbafbb34d0bcb0491346d23461566d81f79
+Section: utils
+Priority: optional
+Description: Welcome application for MadOS
+
