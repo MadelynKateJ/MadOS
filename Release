@@ -1,24 +1,24 @@
 Architectures: amd64 all
 Codename: mados
 Components: main
-Date: Fri, 06 Nov 2026 23:39:31 +0000
+Date: Fri, 06 Nov 2026 23:45:31 +0000
 Description: MadOS package channel
 Label: MadOS
 Origin: MadOS
 Suite: stable
 MD5Sum:
- 5661ed3f358c990a5b36abba7e4d6f1c             2890 Packages
- 33307f65712898257967b9660d133dfd             1307 Packages.gz
- 728e055fca63ec59eae3443f90432a3b              172 Release
+ d9f63bbccde7f7f038b3c8b7d2690f2e             2890 Packages
+ 6f0ed19b30ae94e0c29ba31671d67c37             1306 Packages.gz
+ 2d2c97c6222234ea17d17d2e6ee51108              172 Release
 SHA1:
- 38fc76ca048623a3fbb31bf72b9f46e754a1446c             2890 Packages
- 6d35a065837cf2c33e0088cc92e63bf8647c157f             1307 Packages.gz
- b8b0ce54a39b37ec8d721e5a16838b6bc999c5fc              172 Release
+ 81b4a446947b1b5b0e4bc19cc068d80a67b90c9b             2890 Packages
+ 87b501609930071bc622ef624bdeb617586d4311             1306 Packages.gz
+ 2d51907db9283d560cba26955d76ef05576b0fa2              172 Release
 SHA256:
- f84d00b1a3f77741b5dd7c7392689f16b44c18007df3f331c3bb42fad58d18d9             2890 Packages
- ce6bf84949f960d8737ba792c5b37dfd0be994ba8f8cf1ed772db62dfb7310ee             1307 Packages.gz
- ceeb4a00e5c191ee531617bb02ae6bb7736485e4a323ec3cb7031f5a6d7192bf              172 Release
+ 5b0aa6a3c5aee45410f5d14476525ab30edc6f8f3609b419b60cb53c23a00444             2890 Packages
+ 5619978223f53a481e9d964a452cde3e6ba74efa6472e6207633048273c0509f             1306 Packages.gz
+ 9ccdcc4611d2789c7b36e9f3466c5d2ababde71201d980cefc6c8edf41f8b65a              172 Release
 SHA512:
- 44c80ab2c27fe1bc1f0aa8e30018f9c5a2ca2bf8a8ad30492b0b9d60f879c6f7a312223771582aa6ebd6e37520d4409a2725988c4aa51e0c8744a5d272dac5cc             2890 Packages
- 4ad2fb4b1eddeed7820f736ca644131a56ce38197391efc5c8828ab0bb270608bdbdd43cdd09833b9d501ca3e92bf109e4b145ec1e7b02854942cb91bf9427a0             1307 Packages.gz
- d077744343dacc87ce37548687529080bffa50414f8fe7164fe28aabaf07753443b80d5d8b0c5e90f1a594ea37909c9406d87111f665bbd2ef3174db0e19b5b5              172 Release
+ 4c0bed9e970b75a2660a70b582a465f86400ddf4e1861a64b233dba8fbc8631aaa41d9b8c34b87ead66b9f116f4cda9f6679ee68fcb0962ca4be2c2a043a6f15             2890 Packages
+ f3dc4d9375de29ecf73bd64ee8afd815c99255fe0607c16f37ebc09a7bd25d156557a102415ed7cfd7dce2985ff0e5d4e3d694947d3aca4bd699a3204568246e             1306 Packages.gz
+ cb19fe3bb0fd884a7c1200496da505c75f3c24345c7aedfa4f8c7666e040059cfd66cea0ffaf5d3d289bc2c62f90cce4423ad918919b7172b08c699eb72068f1              172 Release
