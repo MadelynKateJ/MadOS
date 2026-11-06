@@ -67,7 +67,7 @@ bash "$BS/kde68/kde68-cubic.sh"
 say "stage 2/8: MadOS components"
 DEBS=/tmp/mados-debs
 mkdir -p "$DEBS"
-REL=https://github.com/MadelynKateJ/MadOS/releases/download/v0.1.4-alpha
+REL=https://github.com/MadelynKateJ/MadOS/releases/download/v0.1.5-alpha
 ok=1
 for f in mados-core.deb mados-desktop.deb mados-settings.deb \
          mados-ui.deb mados-update.deb mados-welcome.deb; do
@@ -77,7 +77,7 @@ if [ "$ok" = "1" ]; then
   dpkg -i "$DEBS"/*.deb || apt-get install -f -y
 else
   echo "WARNING: could not download the MadOS packages; skipping stage 2."
-  echo "Install them later from the GitHub release (v0.1.4-alpha)."
+  echo "Install them later from the GitHub release (v0.1.5-alpha)."
 fi
 
 # --- Stage 2b: enrol in the MadOS update channel -------------------------------
