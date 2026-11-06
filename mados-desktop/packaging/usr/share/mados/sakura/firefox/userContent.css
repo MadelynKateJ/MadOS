@@ -1,0 +1,12 @@
+/* MadOS Sakura: blossom new tab + home pages. */
+@-moz-document url("about:newtab"), url("about:home") {
+  body {
+    background: linear-gradient(160deg, #FDEEF5 0%, #FBDCEB 55%, #F9A8D4 130%) !important;
+  }
+  .search-wrapper .search-handoff-button, .search-inner-wrapper {
+    background: #FFF7FA !important;
+  }
+}
+@-moz-document url("about:privatebrowsing") {
+  body { background: #3A1F2E !important; }
+}

@@ -1,5 +1,5 @@
 Package: mados-desktop
-Version: 0.1.1
+Version: 0.1.2
 Section: metapackages
 Priority: optional
 Architecture: all
@@ -23,3 +23,7 @@ Depends: plasma-desktop,
  mados-welcome
 Description: MadOS Desktop Environment
  Installs the complete MadOS desktop experience.
+ Also ships the MadOS Sakura theming payload in /usr/share/mados
+ (asset tree, neofetch cat, system first-login runner) and an
+ autostart entry so every new user account, local or domain,
+ receives the full Sakura setup at first login.

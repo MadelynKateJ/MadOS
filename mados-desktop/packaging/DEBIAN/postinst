@@ -1,0 +1,28 @@
+#!/bin/sh
+# mados-desktop postinst: converge /etc/os-release on the MadOS
+# identity file shipped in /usr/share/mados/os-release.
+#
+# The stock /etc/os-release is a symlink into /usr/lib/os-release,
+# which is owned by the base distribution's packages (Mint/neon)
+# and restored whenever they update. Replacing the /etc copy with
+# a real file is the standard way for a derivative to present its
+# own identity; everything reads /etc/os-release first. Whatever
+# was there before is recorded once under /var/lib/mados.
+set -e
+if [ "$1" = "configure" ]; then
+    if [ -f /usr/share/mados/os-release ]; then
+        mkdir -p /var/lib/mados
+        if [ ! -e /var/lib/mados/os-release.original ]; then
+            if [ -L /etc/os-release ]; then
+                echo "symlink:$(readlink /etc/os-release)" \
+                    > /var/lib/mados/os-release.original
+            elif [ -e /etc/os-release ]; then
+                cp /etc/os-release /var/lib/mados/os-release.original
+            fi
+        fi
+        rm -f /etc/os-release
+        cp /usr/share/mados/os-release /etc/os-release
+        chmod 644 /etc/os-release
+    fi
+fi
+exit 0

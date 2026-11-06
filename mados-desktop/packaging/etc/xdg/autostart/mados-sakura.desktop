@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=MadOS Sakura first-login setup
+Exec=bash /usr/share/mados/first-login.sh
+X-KDE-autostart-phase=2
+NoDisplay=true

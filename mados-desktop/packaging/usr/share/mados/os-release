@@ -1,0 +1,11 @@
+PRETTY_NAME="MadOS 0.1.0-alpha"
+NAME="MadOS"
+VERSION_ID="0.1.0"
+VERSION="0.1.0-alpha (Sakura)"
+VERSION_CODENAME=sakura
+ID=linuxmint
+ID_LIKE="ubuntu debian"
+HOME_URL="https://github.com/MadelynKateJ/MadOS"
+BUG_REPORT_URL="https://github.com/MadelynKateJ/MadOS/issues"
+LOGO=mados
+UBUNTU_CODENAME=noble

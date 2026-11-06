@@ -77,14 +77,24 @@ echo "== Building packages =="
   norm packaging
   dpkg-deb --build packaging mados-welcome.deb > /dev/null )
 
-# mados-desktop (metapackage)
+# mados-desktop (metapackage + first-login theming payload).
+# The payload staged in packaging/ is refreshed from its canonical
+# home in build-system/branding, same as the app packages above
+# refresh their staging from src/.
 ( cd "$ROOT"
-  rm -rf /tmp/mados-desktop-build
-  mkdir -p /tmp/mados-desktop-build
-  cp -r mados-desktop/DEBIAN /tmp/mados-desktop-build/
-  find /tmp/mados-desktop-build -type d -exec chmod 755 {} +
-  find /tmp/mados-desktop-build -type f -exec chmod 644 {} +
-  dpkg-deb --build /tmp/mados-desktop-build mados-desktop.deb > /dev/null )
+  rm -rf mados-desktop/packaging/usr/share/mados/sakura \
+         mados-desktop/packaging/usr/share/mados/neofetch
+  mkdir -p mados-desktop/packaging/usr/share/mados
+  cp -r build-system/branding/sakura \
+        mados-desktop/packaging/usr/share/mados/sakura
+  mkdir -p mados-desktop/packaging/usr/share/mados/neofetch
+  cp build-system/branding/neofetch/cat.txt \
+     mados-desktop/packaging/usr/share/mados/neofetch/cat.txt
+  norm mados-desktop/packaging
+  chmod 755 mados-desktop/packaging/DEBIAN/postinst \
+            mados-desktop/packaging/DEBIAN/prerm \
+            mados-desktop/packaging/usr/share/mados/first-login.sh
+  dpkg-deb --build mados-desktop/packaging mados-desktop.deb > /dev/null )
 
 echo "== Assembling the repository =="
 

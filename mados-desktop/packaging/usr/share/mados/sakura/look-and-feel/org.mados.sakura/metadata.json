@@ -1,0 +1,11 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [ { "Name": "Madelyn" } ],
+        "Description": "MadOS Sakura look and feel",
+        "Id": "org.mados.sakura",
+        "License": "GPLv3+",
+        "Name": "MadOS Sakura",
+        "Version": "1.0"
+    }
+}

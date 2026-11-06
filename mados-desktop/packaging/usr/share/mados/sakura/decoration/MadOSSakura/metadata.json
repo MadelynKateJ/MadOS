@@ -1,0 +1,23 @@
+{
+    "KPackageStructure": "aurorae",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "madelyn@madoslinux.org",
+                "Name": "Madelyn"
+            }
+        ],
+        "Category": "Plasma 6 Window Decorations",
+        "ServiceTypes": [
+            "aurorae"
+        ],
+        "EnabledByDefault": true,
+        "Name": "MadOS Sakura",
+        "Description": "MadOS Sakura window decorations - blush frame, blossom buttons",
+        "Id": "MadOSSakura",
+        "License": "GPL v3",
+        "Version": "1.0",
+        "X-KDE-PluginInfo-blur": false,
+        "X-KPackage-Dependencies": []
+    }
+}

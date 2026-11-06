@@ -1,0 +1,12 @@
+#!/bin/sh
+# mados-desktop prerm: on removal, hand /etc/os-release back to
+# the base system by restoring the stock symlink, but only if the
+# file in place is still the MadOS identity this package put there.
+set -e
+if [ "$1" = "remove" ]; then
+    if cmp -s /etc/os-release /usr/share/mados/os-release 2>/dev/null; then
+        rm -f /etc/os-release
+        ln -s ../usr/lib/os-release /etc/os-release
+    fi
+fi
+exit 0
